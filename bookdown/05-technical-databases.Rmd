@@ -1,10 +1,14 @@
 ## Database Backends {#backends}
 
 In mlr3, `r ref("Task")`s store their data in an abstract data format, the `r ref("DataBackend")`.
-The default backend uses `r cran_pkg("data.table")` via the `r ref("DataBackendDataTable")` as an in-memory data base.
+The default backend uses `r cran_pkg("data.table")` via the `r ref("DataBackendDataTable")` as an in-memory database.
 
 For larger data, or when working with many tasks in parallel, it can be advantageous to interface an out-of-memory data.
-We use the excellent R package `r cran_pkg("dbplyr")` which extends `r cran_pkg("dplyr")` to work on many popular data bases like [MariaDB](https://mariadb.org/), [PostgreSQL](https://www.postgresql.org/) or [SQLite](https://www.sqlite.org).
+There are two alternative `r ref("DataBackend")`s which allow to work seamlessly with databases.
+
+First, there is the excellent R package `r cran_pkg("dbplyr")` which extends `r cran_pkg("dplyr")` to work on many popular databases like [MariaDB](https://mariadb.org/), [PostgreSQL](https://www.postgresql.org/) or [SQLite](https://www.sqlite.org).
+Second, we provide a special backend for [DuckDB](https://duckdb.org/) in `r ref("DataBackendDuckDB")` using package `r cran_pkg("duckdb")`.
+
 
 ### Use Case: NYC Flights
 
@@ -127,3 +131,40 @@ Finally, we remove the `tbl` object and close the connection.
 rm(tbl)
 DBI::dbDisconnect(con)
 ```
+
+
+### Converter from in-memory to out-of-memory
+
+If you happen to be in a situation where you already have the data in memory, `mlr3` provides some convenient converters.
+This makes sense for the following scenarios:
+
+* You have a rather large task on which you want to operate on in parallel and communicating the data to the workers is too expensive.
+* You want to work with many medium sized tasks simultaneously, e.g. benchmark them.
+  Holding some of them in the main memory is no problem, but their combined memory requirement exceeds your available memory.
+
+Instead of setting up a real DBMS server and transferring the data over there, we instead use a self-contained file-based database to convert a data frame or `r ref("DataBackend")`.
+We show how to convert to a DuckDB with `r ref("as_duckdb_backend()")` (replace the call with `r ref("as_sqlite_backend()")` to use SQLite):
+
+```{r}
+# convert from data.frame:
+data("flights", package = "nycflights13")
+backend = as_duckdb_backend(flights)
+task = TaskRegr$new("flights", backend, target = "arr_delay")
+
+# convert from backend:
+task = TaskRegr$new("flights", flights, target = "arr_delay")
+task$backend = as_duckdb_backend(task$backend)
+```
+
+The default location to store the database files can be set via `r ref("as_duckdb_backend()")`'s argument `path` or configured via option `"mlr3db.duckdb_dir"`.
+In the defaults, the database is stored in the temporary directory of the currently running R session.
+Note that this will not work well if you distribute your computations on remote workers.
+If you have a shared home directory, set the `path` to `":user:"` instead which uses `r ref("tools::R_user_dir()")` to determine a standard-compliant location for your operating system.
+```{r, eval = FALSE}
+backend = as_duckdb_backend(flights, path = ":user:")
+```
+
+Note that the converted backends come with two additional features:
+
+1. Automatic (re-)connection if the connection was lost or has not been established (e.g., on a remote machine).
+2. Automatic disconnection if the backend is garbage collected via a finalizer (see `r ref("reg.finalizer")`).
