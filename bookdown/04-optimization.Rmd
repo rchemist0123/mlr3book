@@ -4,7 +4,7 @@ In machine learning, when you are dissatisfied with the performance of a model, 
 
 * Can it be improved by tweaking the hyperparameters of the learner, i.e. the configuration options that affect its behavior?
 * Or, should you just use a completely different learner for this particular task?
-* 
+
 This chapter might help answer this question.
 
 **Model Tuning**
