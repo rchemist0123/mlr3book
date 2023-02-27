@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Przemysław Biecek">
+<meta name="author" content="Author 2">
+<title>Flexible and Robust Machine Learning Using mlr3 in R - 10&nbsp; Model Interpretation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./extending.html" rel="next">
+<link href="./technical.html" rel="prev">
+<link href="./favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<script async="" src="https://hypothes.is/embed.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+</head>
+<body class="nav-sidebar floating">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Model Interpretation</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Flexible and Robust Machine Learning Using mlr3 in R</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/mlr-org/mlr3book/tree/main/book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="./Flexible-and-Robust-Machine-Learning-Using-mlr3-in-R.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Getting Started</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction and Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fundamentals</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./performance.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Resampling and Benchmarking</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hyperparameter Optimization</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feature-selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Feature Selection</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pipelines.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipelines</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preprocessing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Preprocessing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./special.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Special Tasks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./technical.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Technical</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./interpretation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Model Interpretation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./extending.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Extending</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Appendices</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solutions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Solutions to exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tasks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Tasks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview-tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Overview Tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./session.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Session Info</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#sec-penguin-task" id="toc-sec-penguin-task" class="nav-link active" data-scroll-target="#sec-penguin-task"><span class="toc-section-number">10.1</span>  Penguin Task</a></li>
+  <li>
+<a href="#sec-iml" id="toc-sec-iml" class="nav-link" data-scroll-target="#sec-iml"><span class="toc-section-number">10.2</span>  iml</a>
+  <ul class="collapse">
+<li><a href="#featureeffects" id="toc-featureeffects" class="nav-link" data-scroll-target="#featureeffects"><span class="toc-section-number">10.2.1</span>  FeatureEffects</a></li>
+  <li><a href="#shapley" id="toc-shapley" class="nav-link" data-scroll-target="#shapley"><span class="toc-section-number">10.2.2</span>  Shapley</a></li>
+  <li><a href="#featureimp" id="toc-featureimp" class="nav-link" data-scroll-target="#featureimp"><span class="toc-section-number">10.2.3</span>  FeatureImp</a></li>
+  <li><a href="#independent-test-data" id="toc-independent-test-data" class="nav-link" data-scroll-target="#independent-test-data"><span class="toc-section-number">10.2.4</span>  Independent Test Data</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-dalex" id="toc-sec-dalex" class="nav-link" data-scroll-target="#sec-dalex"><span class="toc-section-number">10.3</span>  DALEX</a>
+  <ul class="collapse">
+<li><a href="#sec-interpretability-architecture" id="toc-sec-interpretability-architecture" class="nav-link" data-scroll-target="#sec-interpretability-architecture"><span class="toc-section-number">10.3.1</span>  Explanatory model analysis</a></li>
+  <li><a href="#sec-interpretability-dataset-level" id="toc-sec-interpretability-dataset-level" class="nav-link" data-scroll-target="#sec-interpretability-dataset-level"><span class="toc-section-number">10.3.2</span>  Global level exploration</a></li>
+  <li><a href="#sec-interpretability-instance-level" id="toc-sec-interpretability-instance-level" class="nav-link" data-scroll-target="#sec-interpretability-instance-level"><span class="toc-section-number">10.3.3</span>  Local level explanation</a></li>
+  </ul>
+</li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="toc-section-number">10.4</span>  Exercises</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mlr-org/mlr3book/edit/main/book/interpretation.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/mlr-org/mlr3book/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/mlr-org/mlr3book/blob/main/book/interpretation.qmd" class="toc-action">View source</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span id="sec-interpretation" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Model Interpretation</span></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    Przemysław Biecek <a href="https://orcid.org/0000-0001-8423-1823" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            MI2.AI, Warsaw University of Technology
+          </p>
+      </div>
+      <div class="quarto-title-meta-contents">
+    Author 2 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Affiliation 2
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    The goal of this chapter is to present key methods that allow in-depth posthoc analysis of an already trained model. The methods presented are model-agnostic, i.e.&nbsp;they can be applied to models of different classes. When using predictive models in practice, it is often the case that high performance on a validation set is not enough. Users more and more often want to know which variables are important and how they influence the model’s predictions. For the end user, such knowledge allows better utilisation of models in the decision-making process, e.g.&nbsp;by analysing different possible decision options. In addition, if the model’s behaviour turns out to be in line with the domain knowledge or the user’s intuition then the user’s confidence in the prediction will increase. For the modeller, an in-depth analysis of the model allows undesirable model behaviour to be detected and corrected.
+  </div>
+</div>
+
+</header><p>Predictive models have numerous applications in virtually every area of life. The increasing availability of data and frameworks to create models has allowed the widespread adoption of these solutions. However, this does not always go together with enough testing of the models and the consequences of incorrect predictions can be severe. The bestseller book ,,Weapons of Math Destruction’’ <span class="citation" data-cites="ONeil">(<a href="references.html#ref-ONeil" role="doc-biblioref">O’Neil 2016</a>)</span> discusses examples of deployed black-boxes that have led to wrong-headed decisions, sometimes on a massive scale. So what can we do to make our models more thoroughly tested? The answer is methods that allow deeper interpretation of predictive models. In this chapter, we will provide illustrations of how to perform the most popular of these methods <span class="citation" data-cites="Holzinger2022">(<a href="references.html#ref-Holzinger2022" role="doc-biblioref">Holzinger et al. 2022</a>)</span>.</p>
+<p>In principle, all generic frameworks for model interpretation apply to the models fitted with <a href="https://mlr3.mlr-org.com"><code>mlr3</code></a> by just extracting the fitted models from the <a href="https://mlr3.mlr-org.com/reference/Learner.html"><code>Learner</code></a> objects.</p>
+<p>However, two of the most popular frameworks additionally come with some convenience for <a href="https://mlr3.mlr-org.com"><code>mlr3</code></a>, these are</p>
+<ul>
+<li>
+<a href="https://cran.r-project.org/package=iml"><code>iml</code></a> presented in <a href="#sec-iml"><span>Section&nbsp;10.2</span></a>, and</li>
+<li>
+<a href="https://cran.r-project.org/package=DALEX"><code>DALEX</code></a> presented in <a href="#sec-dalex"><span>Section&nbsp;10.3</span></a>.</li>
+</ul>
+<p>Both these packages offer similar functionality, but they differ in design choices. <a href="https://cran.r-project.org/package=iml"><code>iml</code></a> is based on the R6 class system and for this reason working with it is more similar in style to working with the <a href="https://mlr3.mlr-org.com"><code>mlr3</code></a> package. <a href="https://cran.r-project.org/package=DALEX"><code>DALEX</code></a> is based on the S3 class system and is mainly focused on the ability to compare multiple different models on the same graph for comparison and on the explainable model analysis process.</p>
+<section id="sec-penguin-task" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="sec-penguin-task">
+<span class="header-section-number">10.1</span> Penguin Task</h2>
+<p>To understand what model interpretation packages can offer, we start with a thorough example. The goal of this example is to figure out the species of penguins given a set of features. The <a href="https://www.rdocumentation.org/packages/palmerpenguins/topics/penguins"><code>palmerpenguins::penguins</code></a> <span class="citation" data-cites="palmerpenguins2020">(<a href="references.html#ref-palmerpenguins2020" role="doc-biblioref">Horst, Hill, and Gorman 2020</a>)</span> data set will be used which is an alternative to the <code>iris</code> data set. The <code>penguins</code> data sets contain 8 variables of 344 penguins:</p>
+<div class="cell" data-hash="interpretation_cache/html/interpretation-001_20d9b0159f76c67366aa48a902fa5e07">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">data</span>(<span class="st">"penguins"</span>, <span class="at">package =</span> <span class="st">"palmerpenguins"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">str</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [344 × 8] (S3: tbl_df/tbl/data.frame)
+ $ species          : Factor w/ 3 levels "Adelie","Chinstrap",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ island           : Factor w/ 3 levels "Biscoe","Dream",..: 3 3 3 3 3 3 3 3 3 3 ...
+ $ bill_length_mm   : num [1:344] 39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
+ $ bill_depth_mm    : num [1:344] 18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
+ $ flipper_length_mm: int [1:344] 181 186 195 NA 193 190 181 195 193 190 ...
+ $ body_mass_g      : int [1:344] 3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
+ $ sex              : Factor w/ 2 levels "female","male": 2 1 1 NA 1 2 1 2 NA NA ...
+ $ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
+</div>
+</div>
+<p>To get started run:</p>
+<div class="cell" data-hash="interpretation_cache/html/interpretation-002_700f21d45c1623b2bb7bd7a5eed395b8">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(<span class="st">"mlr3"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(<span class="st">"mlr3learners"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="interpretation_cache/html/interpretation-003_699764497d61fe33250fe22ef78a2240">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>penguins <span class="ot">=</span> <span class="fu">na.omit</span>(penguins)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>task_peng <span class="ot">=</span> <span class="fu">as_task_classif</span>(penguins, <span class="at">target =</span> <span class="st">"species"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>penguins = na.omit(penguins)</code> is to omit the 11 cases with missing values. If not omitted, there will be an error when running the learner from the data points that have N/A for some features.</p>
+<div class="cell" data-hash="interpretation_cache/html/interpretation-004_dd3f3a07c2940fb4d2734959142ee9ed">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>learner <span class="ot">=</span> <span class="fu">lrn</span>(<span class="st">"classif.ranger"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>learner<span class="sc">$</span>predict_type <span class="ot">=</span> <span class="st">"prob"</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>learner<span class="sc">$</span><span class="fu">train</span>(task_peng)</span>
+<span id="cb5-4"><a href="#cb5-4"></a>learner<span class="sc">$</span>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ranger result
+
+Call:
+ ranger::ranger(dependent.variable.name = task$target_names, data = task$data(),      probability = self$predict_type == "prob", case.weights = task$weights$weight,      num.threads = 1L) 
+
+Type:                             Probability estimation 
+Number of trees:                  500 
+Sample size:                      333 
+Number of independent variables:  7 
+Mtry:                             2 
+Target node size:                 10 
+Variable importance mode:         none 
+Splitrule:                        gini 
+OOB prediction error (Brier s.):  0.01790106 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>x <span class="ot">=</span> penguins[<span class="fu">which</span>(<span class="fu">names</span>(penguins) <span class="sc">!=</span> <span class="st">"species"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As explained in Section <a href="#learners">Learners</a>, specific learners can be queried with <a href="https://mlr3.mlr-org.com/reference/mlr_learners.html"><code>mlr_learners</code></a>. In Section <a href="#train-predict">Train/Predict</a> it is recommended for some classifiers to use the <code>predict_type</code> as <code>prob</code> instead of directly predicting a label. This is what is done in this example. <code>penguins[which(names(penguins) != "species")]</code> is the data of all the features and <code>y</code> will be the penguins<code>species</code>. <code>learner$train(task_peng)</code> trains the model and <code>learner$model</code> stores the model from the training command. <code>Predictor</code> holds the machine learning model and the data. All interpretation methods in <a href="https://cran.r-project.org/package=iml"><code>iml</code></a> need the machine learning model and the data to be wrapped in the <code>Predictor</code> object.</p>
+</section><section id="sec-iml" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="sec-iml">
+<span class="header-section-number">10.2</span> iml</h2>
+<p>Author: Shawn Storm</p>
+<p><a href="https://cran.r-project.org/package=iml"><code>iml</code></a> is an R package that interprets the behaviour and explains predictions of machine learning models. The functions provided in the <a href="https://cran.r-project.org/package=iml"><code>iml</code></a> package are model-agnostic which gives the flexibility to use any machine learning model.</p>
+<p>This chapter provides examples of how to use <a href="https://cran.r-project.org/package=iml"><code>iml</code></a> with <a href="https://mlr3.mlr-org.com"><code>mlr3</code></a>. For more information refer to the <a href="https://github.com/christophM/iml">IML github</a> and the <a href="https://christophm.github.io/interpretable-ml-book/">IML book</a></p>
+<p>Next is the core functionality of <a href="https://cran.r-project.org/package=iml"><code>iml</code></a>. In this example, three separate interpretation methods will be used: <a href="https://github.com/christophM/iml/blob/master/R/FeatureEffects.R">FeatureEffects</a>, <a href="https://github.com/christophM/iml/blob/master/R/FeatureImp.R">FeatureImp</a> and <a href="https://github.com/christophM/iml/blob/master/R/Shapley.R">Shapley</a></p>
+<ul>
+<li><p><code>FeatureEffects</code> computes the effects for all given features on the model prediction. Different methods are implemented: <a href="https://christophm.github.io/interpretable-ml-book/ale.html">Accumulated Local Effect (ALE) plots</a>, <a href="https://christophm.github.io/interpretable-ml-book/pdp.html">Partial Dependence Plots (PDPs)</a> and <a href="https://christophm.github.io/interpretable-ml-book/ice.html">Individual Conditional Expectation (ICE) curves</a>.</p></li>
+<li><p><code>Shapley</code> computes feature contributions for single predictions with the Shapley value – an approach from cooperative game theory (<a href="https://christophm.github.io/interpretable-ml-book/shapley.html">Shapley Value</a>).</p></li>
+<li><p><code>FeatureImp</code> computes the importance of features by calculating the increase in the model’s prediction error after permuting the feature (more <a href="https://christophm.github.io/interpretable-ml-book/feature-importance.html#feature-importance">here</a>).</p></li>
+</ul>
+<section id="featureeffects" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="featureeffects">
+<span class="header-section-number">10.2.1</span> FeatureEffects</h3>
+<p>In addition to the commands above the following two need to be run:</p>
+<div class="cell" data-layout-align="center" data-hash="interpretation_cache/html/interpretation-005_f0f6d2e035a850a5409a7e29d1a62750">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">library</span>(<span class="st">"iml"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a>model <span class="ot">=</span> Predictor<span class="sc">$</span><span class="fu">new</span>(learner, <span class="at">data =</span> x, <span class="at">y =</span> penguins<span class="sc">$</span>species)</span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a>num_features <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span>, <span class="st">"flipper_length_mm"</span>, <span class="st">"body_mass_g"</span>, <span class="st">"year"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6"></a>effect <span class="ot">=</span> FeatureEffects<span class="sc">$</span><span class="fu">new</span>(model)</span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="fu">plot</span>(effect, <span class="at">features =</span> num_features)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="interpretation_files/figure-html/interpretation-005-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Plot of the results from FeatureEffects. FeatureEffects computes and plots feature effects of prediction models</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><code>effect</code> stores the object from the <code>FeatureEffect</code> computation and the results can then be plotted. In this example, all of the features provided by the <code>penguins</code> data set were used.</p>
+<p>All features except for <code>year</code> provide meaningful interpretable information. It should be clear why <code>year</code> doesn’t provide anything of significance. <code>bill_length_mm</code> shows for example that when the bill length is smaller than roughly 40mm, there is a high chance that the penguin is an Adelie.</p>
+</section><section id="shapley" class="level3" data-number="10.2.2"><h3 data-number="10.2.2" class="anchored" data-anchor-id="shapley">
+<span class="header-section-number">10.2.2</span> Shapley</h3>
+<div class="cell" data-layout-align="center" data-hash="interpretation_cache/html/interpretation-006_4dd9595d40a6cb51b444290077d71958">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>x <span class="ot">=</span> penguins[<span class="fu">which</span>(<span class="fu">names</span>(penguins) <span class="sc">!=</span> <span class="st">"species"</span>)]</span>
+<span id="cb9-2"><a href="#cb9-2"></a>model <span class="ot">=</span> Predictor<span class="sc">$</span><span class="fu">new</span>(learner, <span class="at">data =</span> penguins, <span class="at">y =</span> <span class="st">"species"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>x.interest <span class="ot">=</span> <span class="fu">data.frame</span>(penguins[<span class="dv">1</span>, ])</span>
+<span id="cb9-4"><a href="#cb9-4"></a>shapley <span class="ot">=</span> Shapley<span class="sc">$</span><span class="fu">new</span>(model, <span class="at">x.interest =</span> x.interest)</span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="fu">plot</span>(shapley)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="interpretation_files/figure-html/interpretation-006-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Plot of the results from Shapley. <span class="math inline">\(\phi\)</span> gives the increase or decrease in probability given the values on the vertical axis</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The <span class="math inline">\(\phi\)</span> provides insight into the probability given the values on the vertical axis. For example, a penguin is less likely to be Gentoo if the bill_depth=18.7 is and much more likely to be Adelie than Chinstrap.</p>
+</section><section id="featureimp" class="level3" data-number="10.2.3"><h3 data-number="10.2.3" class="anchored" data-anchor-id="featureimp">
+<span class="header-section-number">10.2.3</span> FeatureImp</h3>
+<div class="cell" data-layout-align="center" data-hash="interpretation_cache/html/interpretation-007_9b7f53c4a466f915f165f1e3a12de862">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>effect <span class="ot">=</span> FeatureImp<span class="sc">$</span><span class="fu">new</span>(model, <span class="at">loss =</span> <span class="st">"ce"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a>effect<span class="sc">$</span><span class="fu">plot</span>(<span class="at">features =</span> num_features)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="interpretation_files/figure-html/interpretation-007-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Plot of the results from FeatureImp. FeatureImp visualizes the importance of features given the prediction model</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><code>FeatureImp</code> shows the level of importance of the features when classifying penguins. It is clear to see that the <code>bill_length_mm</code> is of high importance and one should concentrate on the different boundaries of this feature when attempting to classify the three species.</p>
+</section><section id="independent-test-data" class="level3" data-number="10.2.4"><h3 data-number="10.2.4" class="anchored" data-anchor-id="independent-test-data">
+<span class="header-section-number">10.2.4</span> Independent Test Data</h3>
+<p>It is also interesting to see how well the model performs on a test data set. For this section, exactly as was recommended in Section <a href="#train-predict">Train/Predict</a>, 80% of the penguin data set will be used for the training set and 20% for the test set:</p>
+<div class="cell" data-hash="interpretation_cache/html/interpretation-008_ff3d7d7cfa61c2eb45cdbe1db7680dbd">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>train_set <span class="ot">=</span> <span class="fu">sample</span>(task_peng<span class="sc">$</span>nrow, <span class="fl">0.8</span> <span class="sc">*</span> task_peng<span class="sc">$</span>nrow)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>test_set <span class="ot">=</span> <span class="fu">setdiff</span>(<span class="fu">seq_len</span>(task_peng<span class="sc">$</span>nrow), train_set)</span>
+<span id="cb11-3"><a href="#cb11-3"></a>learner<span class="sc">$</span><span class="fu">train</span>(task_peng, <span class="at">row_ids =</span> train_set)</span>
+<span id="cb11-4"><a href="#cb11-4"></a>prediction <span class="ot">=</span> learner<span class="sc">$</span><span class="fu">predict</span>(task_peng, <span class="at">row_ids =</span> test_set)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>First, we compare the feature importance on training and test set</p>
+<div class="cell" data-layout-align="center" data-hash="interpretation_cache/html/interpretation-009_4ada5ded443b7c83da6726056aee77b2">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># plot on training</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>model <span class="ot">=</span> Predictor<span class="sc">$</span><span class="fu">new</span>(learner, <span class="at">data =</span> penguins[train_set, ], <span class="at">y =</span> <span class="st">"species"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3"></a>effect <span class="ot">=</span> FeatureImp<span class="sc">$</span><span class="fu">new</span>(model, <span class="at">loss =</span> <span class="st">"ce"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4"></a>plot_train <span class="ot">=</span> <span class="fu">plot</span>(effect, <span class="at">features =</span> num_features)</span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co"># plot on test data</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>model <span class="ot">=</span> Predictor<span class="sc">$</span><span class="fu">new</span>(learner, <span class="at">data =</span> penguins[test_set, ], <span class="at">y =</span> <span class="st">"species"</span>)</span>
+<span id="cb12-8"><a href="#cb12-8"></a>effect <span class="ot">=</span> FeatureImp<span class="sc">$</span><span class="fu">new</span>(model, <span class="at">loss =</span> <span class="st">"ce"</span>)</span>
+<span id="cb12-9"><a href="#cb12-9"></a>plot_test <span class="ot">=</span> <span class="fu">plot</span>(effect, <span class="at">features =</span> num_features)</span>
+<span id="cb12-10"><a href="#cb12-10"></a></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="co"># combine into single plot</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="fu">library</span>(<span class="st">"patchwork"</span>)</span>
+<span id="cb12-13"><a href="#cb12-13"></a>plot_train <span class="sc">+</span> plot_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="interpretation_files/figure-html/interpretation-009-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">FeatImp on train (left) and test (right)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The results of the train set for <code>FeatureImp</code> are very similar, which is expected. We follow a similar approach to compare the feature effects:</p>
+<div class="cell" data-layout-align="center" data-hash="interpretation_cache/html/interpretation-010_d4c5803fefa0e829c714d5585c7da9a7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>model <span class="ot">=</span> Predictor<span class="sc">$</span><span class="fu">new</span>(learner, <span class="at">data =</span> penguins[train_set, ], <span class="at">y =</span> <span class="st">"species"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a>effect <span class="ot">=</span> FeatureEffects<span class="sc">$</span><span class="fu">new</span>(model)</span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">plot</span>(effect, <span class="at">features =</span> num_features)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="interpretation_files/figure-html/interpretation-010-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">FeatEffect train data set</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center" data-hash="interpretation_cache/html/interpretation-011_53764dc59db3fbb87d9c4bee435984c3">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>model <span class="ot">=</span> Predictor<span class="sc">$</span><span class="fu">new</span>(learner, <span class="at">data =</span> penguins[test_set, ], <span class="at">y =</span> <span class="st">"species"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a>effect <span class="ot">=</span> FeatureEffects<span class="sc">$</span><span class="fu">new</span>(model)</span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="fu">plot</span>(effect, <span class="at">features =</span> num_features)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="interpretation_files/figure-html/interpretation-011-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">FeatEffect test data set</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As is the case with <code>FeatureImp</code>, the test data results show either an over- or underestimate of feature importance / feature effects compared to the results where the entire penguin data set was used. This would be a good opportunity for the reader to attempt to resolve the estimation by playing with the amount of features and the amount of data used for both the test and train data sets of <code>FeatureImp</code> and <code>FeatureEffects</code>. Be sure to not change the line <code>train_set = sample(task_peng$nrow, 0.8 * task_peng$nrow)</code> as it will randomly sample the data again.</p>
+</section></section><section id="sec-dalex" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="sec-dalex">
+<span class="header-section-number">10.3</span> DALEX</h2>
+<p>The <a href="https://cran.r-project.org/package=DALEX"><code>DALEX</code></a> <span class="citation" data-cites="Biecek2018">(<a href="references.html#ref-Biecek2018" role="doc-biblioref">Biecek 2018</a>)</span> package belongs to <a href="https://www.drwhy.ai/">DrWhy</a> family of solutions created to support the responsible development of machine learning models. It implements the most common methods for explaining predictive models using posthoc model agnostic techniques. You can use it for any model built with the <a href="https://mlr3.mlr-org.com"><code>mlr3</code></a> package as well as with other frameworks in <code>R</code>. The counterpart in <code>Python</code> is the library <code>dalex</code> <span class="citation" data-cites="Baniecki2021">(<a href="references.html#ref-Baniecki2021" role="doc-biblioref">Baniecki et al. 2021</a>)</span>.</p>
+<p>The philosophy of working with <a href="https://cran.r-project.org/package=DALEX"><code>DALEX</code></a> package is based on the process of explanatory model analysis described in the <a href="https://ema.drwhy.ai/">EMA book</a> <span class="citation" data-cites="biecek_burzykowski_2021">(<a href="references.html#ref-biecek_burzykowski_2021" role="doc-biblioref">Biecek and Burzykowski 2021</a>)</span>. In this chapter, we present code snippets and a general overview of this package. For illustrative purposes, we reuse the <code>learner</code> model built in the <a href="#sec-penguin-task"><span>Section&nbsp;10.1</span></a> on <a href="https://www.rdocumentation.org/packages/palmerpenguins/topics/penguins"><code>palmerpenguins::penguins</code></a> data.</p>
+<p>Once you become familiar with the philosophy of working with the <a href="https://cran.r-project.org/package=DALEX"><code>DALEX</code></a> package, you can also use other packages from this family such as <a href="https://cran.r-project.org/package=fairmodels"><code>fairmodels</code></a> <span class="citation" data-cites="Wisniewski2022">(<a href="references.html#ref-Wisniewski2022" role="doc-biblioref">Wiśniewski and Biecek 2022</a>)</span> for detection and mitigation of biases, <a href="https://cran.r-project.org/package=modelStudio"><code>modelStudio</code></a> <span class="citation" data-cites="Baniecki2019">(<a href="references.html#ref-Baniecki2019" role="doc-biblioref">Baniecki and Biecek 2019</a>)</span> for interactive model exploration, <a href="https://cran.r-project.org/package=modelDown"><code>modelDown</code></a> <span class="citation" data-cites="Romaszko2019">(<a href="references.html#ref-Romaszko2019" role="doc-biblioref">Romaszko et al. 2019</a>)</span> for the automatic generation of IML model documentation in the form of a report, <a href="https://cran.r-project.org/package=survex"><code>survex</code></a> <span class="citation" data-cites="Krzyzinski2023">(<a href="references.html#ref-Krzyzinski2023" role="doc-biblioref">Krzyziński et al. 2023</a>)</span> for the explanation of survival models, or <a href="https://cran.r-project.org/package=treeshap"><code>treeshap</code></a> for the analysis of tree-based models.</p>
+<section id="sec-interpretability-architecture" class="level3" data-number="10.3.1"><h3 data-number="10.3.1" class="anchored" data-anchor-id="sec-interpretability-architecture">
+<span class="header-section-number">10.3.1</span> Explanatory model analysis</h3>
+<p>The analysis of a model is usually an interactive process starting with a shallow analysis – usually a single-number summary. Then in a series of subsequent steps, one can systematically deepen understanding of the model by exploring the importance of single variables or pairs of variables to an in-depth analysis of the relationship between selected variables to the model outcome. See <span class="citation" data-cites="Bucker2022">Bücker et al. (<a href="references.html#ref-Bucker2022" role="doc-biblioref">2022</a>)</span> for a broader discussion of what the model exploration process looks like.</p>
+<p>This explanatory model analysis (EMA) process can focus on a single observation, in which case we speak of local model analysis, or for a set of observations, in which case we speak of global data analysis. Below, we will present these two scenarios in separate subsections. See <a href="#fig-dalex-fig-plot-01">Figure&nbsp;<span>10.1</span></a> for an overview of key functions that will be discussed.</p>
+<div class="cell" data-layout-align="center" data-hash="interpretation_cache/html/fig-dalex-fig-plot-01_fc0d83025e1800e674a0a51356dab9b1">
+<div class="cell-output-display">
+<div id="fig-dalex-fig-plot-01" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="Figures/DALEX_ema_process.png" class="img-fluid figure-img" style="width:92.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;10.1: Taxonomy of methods for model exploration presented in this chapter. Left part overview methods for global level exploration while the right part is related to local level model exploration.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Predictive models in R have different internal structures. To be able to analyse them systematically, an intermediate object – a wrapper – is needed to provide a consistent interface for accessing the model. Working with explanations in the <a href="https://cran.r-project.org/package=DALEX"><code>DALEX</code></a> package always starts with the creation of such a wrapper with the use of the <a href="https://www.rdocumentation.org/packages/DALEX/topics/explain"><code>DALEX::explain()</code></a> function. This function has several arguments that allow the model created by the various frameworks to be parameterised accordingly. For models created in the <a href="https://mlr3.mlr-org.com"><code>mlr3</code></a> package, it is more convenient to use the <a href="https://www.rdocumentation.org/packages/DALEXtra/topics/explain_mlr3"><code>DALEXtra::explain_mlr3()</code></a>.</p>
+<div class="cell" data-hash="interpretation_cache/html/interpretation-019_8e5b4ec7a36e0124ba067d1887a9fd2d">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">library</span>(<span class="st">"DALEX"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">library</span>(<span class="st">"DALEXtra"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a>ranger_exp <span class="ot">=</span> DALEX<span class="sc">::</span><span class="fu">explain</span>(learner,</span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="at">data =</span> penguins[test_set, ],</span>
+<span id="cb15-6"><a href="#cb15-6"></a>  <span class="at">y =</span> penguins[test_set, <span class="st">"species"</span>],</span>
+<span id="cb15-7"><a href="#cb15-7"></a>  <span class="at">label =</span> <span class="st">"Ranger Penguins"</span>,</span>
+<span id="cb15-8"><a href="#cb15-8"></a>  <span class="at">colorize =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Preparation of a new explainer is initiated
+  -&gt; model label       :  Ranger Penguins 
+  -&gt; data              :  67  rows  8  cols 
+  -&gt; data              :  tibble converted into a data.frame 
+  -&gt; target variable   :  Argument 'y' was a data frame. Converted to a vector. (  WARNING  )
+  -&gt; target variable   :  67  values 
+  -&gt; predict function  :  yhat.LearnerClassif  will be used (  default  )
+  -&gt; predicted values  :  No value for predict function target column. (  default  )
+  -&gt; model_info        :  package mlr3 , ver. 0.14.1 , task multiclass (  default  ) 
+  -&gt; predicted values  :  predict function returns multiple columns:  3  (  default  ) 
+  -&gt; residual function :  difference between 1 and probability of true class (  default  )
+  -&gt; residuals         :  numerical, min =  0 , mean =  0.07756016 , max =  0.5380321  
+  A new explainer has been created!  </code></pre>
+</div>
+</div>
+<p>The <a href="https://www.rdocumentation.org/packages/DALEX/topics/explain"><code>DALEX::explain()</code></a> function performs a series of internal checks so the output is a bit verbose. Turn the <code>verbose = FALSE</code> argument to make it less wordy.</p>
+</section><section id="sec-interpretability-dataset-level" class="level3" data-number="10.3.2"><h3 data-number="10.3.2" class="anchored" data-anchor-id="sec-interpretability-dataset-level">
+<span class="header-section-number">10.3.2</span> Global level exploration</h3>
+<p>The global model analysis aims to understand how a model behaves on average on a set of observations, most commonly a test set. In the <a href="https://cran.r-project.org/package=DALEX"><code>DALEX</code></a> package, functions for global analysis have names starting with the prefix <code>model_</code>.</p>
+<section id="model-performance" class="level4" data-number="10.3.2.1"><h4 data-number="10.3.2.1" class="anchored" data-anchor-id="model-performance">
+<span class="header-section-number">10.3.2.1</span> Model Performance</h4>
+<p>As shown in Figure <a href="#fig-dalex-fig-plot-01">Figure&nbsp;<span>10.1</span></a>, it starts by evaluating the performance of a model. This can be done with a variety of tools, in the <a href="https://cran.r-project.org/package=DALEX"><code>DALEX</code></a> package the default is to use the <a href="https://www.rdocumentation.org/packages/DALEX/topics/model_performance"><code>DALEX::model_performance</code></a> function. Since the <code>explain</code> function checks what type of task is being analysed, it can select the appropriate performance measures for it. In our illustration, we have a multi-label classification, so measures such as micro-aggregated F1, macro-aggregated F1 etc. are calculated in the following snippet. One of the calculated measures is cross entropy and it will be used later in the following sections.</p>
+<p>Each explanation can be drawn with the generic <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function, for multi-label classification the distribution of residuals is drawn by default.</p>
+<div class="cell" data-layout-align="center" data-hash="interpretation_cache/html/interpretation-020a_44dbe0864c1faf68ccf4bf83cd3549b6">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>perf_penguin <span class="ot">=</span> <span class="fu">model_performance</span>(ranger_exp)</span>
+<span id="cb17-2"><a href="#cb17-2"></a>perf_penguin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Measures for:  multiclass
+micro_F1   : 1 
+macro_F1   : 1 
+w_macro_F1 : 1 
+accuracy   : 1 
+w_macro_auc: 1 
+cross_entro: 6.034954
+
+Residuals:
+          0%          10%          20%          30%          40%          50% 
+0.0000000000 0.0005846154 0.0036863492 0.0111489133 0.0315985873 0.0440341048 
+         60%          70%          80%          90%         100% 
+0.0535907937 0.0683762754 0.0956176783 0.2191798413 0.5380321429 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2"></a>old_theme <span class="ot">=</span> <span class="fu">set_theme_dalex</span>(<span class="st">"ema"</span>) </span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="fu">plot</span>(perf_penguin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="interpretation_files/figure-html/interpretation-020a-1.png" class="img-fluid figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The task of classifying the penguin species is rather easy, which is why there are so many values of 1 in the performance assessment of this model.</p>
+</section><section id="permutational-variable-importance" class="level4" data-number="10.3.2.2"><h4 data-number="10.3.2.2" class="anchored" data-anchor-id="permutational-variable-importance">
+<span class="header-section-number">10.3.2.2</span> Permutational Variable Importance</h4>
+<p>A popular technique for assessing variable importance in a model-agnostic manner is the permutation variable importance. It is based on the difference (or ratio) in the selected loss function after the selected variable or set of variables has been permuted. Read more about this technique in <a href="https://ema.drwhy.ai/featureImportance.html">Variable-importance Measures</a> chapter.</p>
+<p>The <a href="https://www.rdocumentation.org/packages/DALEX/topics/model_parts"><code>DALEX::model_parts()</code></a> function calculates the importance of variables and its results can be visualized with the generic <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function.</p>
+<div class="cell" data-layout-align="center" data-hash="interpretation_cache/html/interpretation-021_96a455a2650378bb9bb23b3f84bcd1ee">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>ranger_effect <span class="ot">=</span> <span class="fu">model_parts</span>(ranger_exp)</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">head</span>(ranger_effect)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       variable mean_dropout_loss           label
+1  _full_model_          6.034954 Ranger Penguins
+2          year          5.988560 Ranger Penguins
+3       species          6.034954 Ranger Penguins
+4           sex          7.002289 Ranger Penguins
+5   body_mass_g         12.377824 Ranger Penguins
+6 bill_depth_mm         15.617252 Ranger Penguins</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">plot</span>(ranger_effect, <span class="at">show_boxplots =</span> <span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="interpretation_files/figure-html/interpretation-021-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The bars start in loss (here cross-entropy loss) for the selected data and end in a loss for the data after the permutation of the selected variable. The more important the variable, the more the model will lose after its permutation.</p>
+</section><section id="partial-dependence" class="level4" data-number="10.3.2.3"><h4 data-number="10.3.2.3" class="anchored" data-anchor-id="partial-dependence">
+<span class="header-section-number">10.3.2.3</span> Partial Dependence</h4>
+<p>Once we know which variables are most important, we can use <a href="https://ema.drwhy.ai/partialDependenceProfiles.html">Partial Dependence Plots</a> to show how the model, on average, changes with changes in selected variables.</p>
+<p>The <a href="https://www.rdocumentation.org/packages/DALEX/topics/model_profile"><code>DALEX::model_profile()</code></a> function calculates the partial dependence profiles. The <code>type</code> argument of this function also allows <em>Marginal profiles</em> and <em>Accumulated Local profiles</em> to be calculated. Again, the result of the explanation can be model_profile with the generic function <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>.</p>
+<div class="cell" data-layout-align="center" data-hash="interpretation_cache/html/interpretation-024_d4b1d6a5bbf667d0a3cbd29b735879ab">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>ranger_profiles <span class="ot">=</span> <span class="fu">model_profile</span>(ranger_exp)</span>
+<span id="cb23-2"><a href="#cb23-2"></a>ranger_profiles</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Top profiles    : 
+        _vname_                   _label_    _x_    _yhat_ _ids_
+1 bill_depth_mm    Ranger Penguins.Adelie 13.500 0.2839077     0
+2 bill_depth_mm Ranger Penguins.Chinstrap 13.500 0.1908264     0
+3 bill_depth_mm    Ranger Penguins.Gentoo 13.500 0.5252659     0
+4 bill_depth_mm    Ranger Penguins.Adelie 13.566 0.2839077     0
+5 bill_depth_mm Ranger Penguins.Chinstrap 13.566 0.1908264     0
+6 bill_depth_mm    Ranger Penguins.Gentoo 13.566 0.5252659     0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">plot</span>(ranger_profiles) <span class="sc">+</span> </span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span> </span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Partial Dependence for Penguins"</span>,<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="interpretation_files/figure-html/interpretation-024-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For the multi-label classification model, profiles are drawn for each class separately by indicating them with different colours. We already know which variable is the most important, so now we can read how the model result changes with the change of this variable. In our example, based on <code>bill_length_mm</code> we can separate <em>Adelie</em> from <em>Chinstrap</em> and based on <code>flipper_length_mm</code> we can separate <em>Adelie</em> from <em>Gentoo</em>.</p>
+</section></section><section id="sec-interpretability-instance-level" class="level3" data-number="10.3.3"><h3 data-number="10.3.3" class="anchored" data-anchor-id="sec-interpretability-instance-level">
+<span class="header-section-number">10.3.3</span> Local level explanation</h3>
+<p>The local model analysis aims to understand how a model behaves for a single observation. In the <a href="https://cran.r-project.org/package=DALEX"><code>DALEX</code></a> package, functions for local analysis have names starting with the prefix <code>predict_</code>.</p>
+<p>We will carry out the following examples using Steve the penguin of the <code>Adelie</code> species as an example.</p>
+<div class="cell" data-hash="interpretation_cache/html/interpretation-025a_4e54eab22cfbe7daf72a4d82e7d1b71f">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>steve <span class="ot">=</span> penguins[<span class="dv">1</span>,]</span>
+<span id="cb26-2"><a href="#cb26-2"></a>steve</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 8
+  species island    bill_length_mm bill_depth_mm flipper_l…¹ body_…² sex    year
+  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;       &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
+1 Adelie  Torgersen           39.1          18.7         181    3750 male   2007
+# … with abbreviated variable names ¹​flipper_length_mm, ²​body_mass_g</code></pre>
+</div>
+</div>
+<section id="model-prediction" class="level4" data-number="10.3.3.1"><h4 data-number="10.3.3.1" class="anchored" data-anchor-id="model-prediction">
+<span class="header-section-number">10.3.3.1</span> Model Prediction</h4>
+<p>As shown in Figure <a href="#fig-dalex-fig-plot-01">Figure&nbsp;<span>10.1</span></a>, the local analysis starts with the calculation of a model prediction.</p>
+<p>For Steve, the species was correctly predicted as <code>Adelie</code> with high probability.</p>
+<div class="cell" data-hash="interpretation_cache/html/interpretation-025_70b46e3fa84bd8d502b639a0181ef511">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">predict</span>(ranger_exp, steve)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Adelie   Chinstrap Gentoo
+[1,] 0.9900897 0.009910317      0</code></pre>
+</div>
+</div>
+</section><section id="break-down" class="level4" data-number="10.3.3.2"><h4 data-number="10.3.3.2" class="anchored" data-anchor-id="break-down">
+<span class="header-section-number">10.3.3.2</span> Break Down</h4>
+<p>A popular technique for assessing the contributions of variables to model prediction is Break Down (see <a href="https://ema.drwhy.ai/breakDown.html">Introduction to Break Down</a> chapter for more information about this method).</p>
+<p>The function <a href="https://www.rdocumentation.org/packages/DALEX/topics/predict_parts"><code>DALEX::predict_parts()</code></a> function calculates the attributions of variables and its results can be visualized with the generic <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function.</p>
+<div class="cell" data-layout-align="center" data-hash="interpretation_cache/html/interpretation-027_bcaab7af061be983c874a943a3bdc221">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>ranger_attributions <span class="ot">=</span> <span class="fu">predict_parts</span>(ranger_exp, <span class="at">new_observation =</span> steve)</span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">plot</span>(ranger_attributions) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Break Down for Steve"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="interpretation_files/figure-html/interpretation-027-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Looking at the plots above, we can read that the biggest contributors to the final prediction were for Steve the variables bill length and flipper.</p>
+</section><section id="shapley-values" class="level4" data-number="10.3.3.3"><h4 data-number="10.3.3.3" class="anchored" data-anchor-id="shapley-values">
+<span class="header-section-number">10.3.3.3</span> Shapley Values</h4>
+<p>By far the most popular technique for local model exploration <span class="citation" data-cites="Holzinger2022">(<a href="references.html#ref-Holzinger2022" role="doc-biblioref">Holzinger et al. 2022</a>)</span> is Shapley values and the most popular algorithm for estimating these values is the SHAP algorithm. Find a detailed description of the method and algorithm in the chapter <a href="https://ema.drwhy.ai/shapley.html">SHapley Additive exPlanations (SHAP)</a>.</p>
+<p>The function <a href="https://www.rdocumentation.org/packages/DALEX/topics/predict_parts"><code>DALEX::predict_parts()</code></a> calculates SHAP attributions, you just need to set <code>type = "shap"</code>. Its results can be visualized with a generic <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function.</p>
+<div class="cell" data-layout-align="center" data-hash="interpretation_cache/html/interpretation-028_c6df286f344dbdb8bebec018f6780a2c">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>ranger_shap <span class="ot">=</span> <span class="fu">predict_parts</span>(ranger_exp, <span class="at">new_observation =</span> steve, </span>
+<span id="cb31-2"><a href="#cb31-2"></a>             <span class="at">type =</span> <span class="st">"shap"</span>)</span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="fu">plot</span>(ranger_shap, <span class="at">show_boxplots =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb31-4"><a href="#cb31-4"></a>             <span class="fu">ggtitle</span>(<span class="st">"Shapley values for Steve"</span>, <span class="st">""</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="interpretation_files/figure-html/interpretation-028-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The results for Break Down and SHAP methods are generally similar. Differences will emerge if there are many complex interactions in the model.</p>
+</section><section id="ceteris-paribus" class="level4" data-number="10.3.3.4"><h4 data-number="10.3.3.4" class="anchored" data-anchor-id="ceteris-paribus">
+<span class="header-section-number">10.3.3.4</span> Ceteris Paribus</h4>
+<p>In the previous section, we’ve introduced a global explanation – Partial Dependence plots. Ceteris Paribus plots are the local level version of that plot. Read more about this technique in the chapter <a href="https://ema.drwhy.ai/ceterisParibus.html">Ceteris Paribus</a> and note that these profiles are also called Individual Conditional Expectations (ICE). They show the response of a model when only one variable is changed while others stay unchanged.</p>
+<p>The function <a href="https://www.rdocumentation.org/packages/DALEX/topics/predict_profile"><code>DALEX::predict_profile()</code></a> calculates Ceteris paribus profiles which can be visualized with the generic <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function.</p>
+<div class="cell" data-layout-align="center" data-hash="interpretation_cache/html/interpretation-029_ee000efcc77d93571c869e470c05620d">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>ranger_ceteris <span class="ot">=</span> <span class="fu">predict_profile</span>(ranger_exp, steve)</span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">plot</span>(ranger_ceteris) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Ceteris paribus for Steve"</span>, <span class="st">" "</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="interpretation_files/figure-html/interpretation-029-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Blue dot stands for the prediction for Steve. Only a big change in bill length could convince the model of Steve’s different species.</p>
+</section></section></section><section id="exercises" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="exercises">
+<span class="header-section-number">10.4</span> Exercises</h2>
+<p>Model explanation allows us to confront our expert knowledge related to the problem with relations learned by the model. Following tasks are based on predictions of the value of football players based on data from the FIFA game. It is a graceful example, as most people have some intuition about how a footballer’s age or skill can affect their value. The latest FIFA statistics can be downloaded from <a href="https://www.kaggle.com/">kaggle.com</a>, but also one can use the 2020 data avaliable in the <code>DALEX</code> packages(see <code><a href="https://modeloriented.github.io/DALEX/reference/fifa.html">DALEX::fifa</a></code> dataset). The following exercises can be performed in both the <code>iml</code> and <code>DALEX</code> packages and we have provided solutions for both.</p>
+<ol type="1">
+<li><p>Prepare a <code>mlr3</code> regression task for <code>fifa</code> data. Select only variables describing the age and skills of footballers. Train any predictive model for this task, e.g.&nbsp;<code>regr.ranger</code>.</p></li>
+<li><p>Use the permutation importance method to calculate variable importance ranking. Which variable is the most important? Is it surprising?</p></li>
+<li><p>Use the Partial Dependence profile to draw the global behavior of the model for this variable. Is it aligned with your expectations?</p></li>
+</ol>
+<p>4 Choose one of the football players. You can choose some well-known striker (e.g.&nbsp;Robert Lewandowski) or a well-known goalkeeper (e.g.&nbsp;Manuel Neuer). The following tasks are worth repeating for several different choices.</p>
+<ol start="5" type="1">
+<li><p>For the selected footballer, calculate and plot the Shapley values. Which variable is locally the most important and has the strongest influence on the valuation of the footballer?</p></li>
+<li><p>For the selected footballer, calculate the Ceteris Paribus / Individual Conditional Expectatons profiles to draw the local behaviour of the model for this variable. Is it different from the global behaviour?</p></li>
+</ol>
+
+
+<!-- -->
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-Baniecki2019" class="csl-entry" role="doc-biblioentry">
+Baniecki, Hubert, and Przemyslaw Biecek. 2019. <span>“<span class="nocase">modelStudio: Interactive Studio with Explanations for ML Predictive Models</span>.”</span> <em>Journal of Open Source Software</em> 4 (43): 1798. <a href="https://doi.org/10.21105/joss.01798">https://doi.org/10.21105/joss.01798</a>.
+</div>
+<div id="ref-Baniecki2021" class="csl-entry" role="doc-biblioentry">
+Baniecki, Hubert, Wojciech Kretowicz, Piotr Piątyszek, Jakub Wiśniewski, and Przemysław Biecek. 2021. <span>“<span class="nocase">dalex: Responsible Machine Learning with Interactive Explainability and Fairness in Python</span>.”</span> <em>Journal of Machine Learning Research</em> 22 (214): 1–7. <a href="http://jmlr.org/papers/v22/20-1473.html">http://jmlr.org/papers/v22/20-1473.html</a>.
+</div>
+<div id="ref-Biecek2018" class="csl-entry" role="doc-biblioentry">
+Biecek, Przemyslaw. 2018. <span>“<span class="nocase">DALEX: Explainers for complex predictive models in R</span>.”</span> <em>Journal of Machine Learning Research</em> 19 (84): 1–5. <a href="http://jmlr.org/papers/v19/18-416.html">http://jmlr.org/papers/v19/18-416.html</a>.
+</div>
+<div id="ref-biecek_burzykowski_2021" class="csl-entry" role="doc-biblioentry">
+Biecek, Przemyslaw, and Tomasz Burzykowski. 2021. <em><span>Explanatory Model Analysis</span></em>. Chapman; Hall/CRC, New York. <a href="https://ema.drwhy.ai/">https://ema.drwhy.ai/</a>.
+</div>
+<div id="ref-Bucker2022" class="csl-entry" role="doc-biblioentry">
+Bücker, Michael, Gero Szepannek, Alicja Gosiewska, and Przemyslaw Biecek. 2022. <span>“Transparency, Auditability, and Explainability of Machine Learning Models in Credit Scoring.”</span> <em>Journal of the Operational Research Society</em> 73 (1): 70–90. <a href="https://doi.org/10.1080/01605682.2021.1922098">https://doi.org/10.1080/01605682.2021.1922098</a>.
+</div>
+<div id="ref-Holzinger2022" class="csl-entry" role="doc-biblioentry">
+Holzinger, Andreas, Anna Saranti, Christoph Molnar, Przemyslaw Biecek, and Wojciech Samek. 2022. <span>“Explainable AI Methods - a Brief Overview.”</span> <em>International Workshop on Extending Explainable AI Beyond Deep Models and Classifiers</em>, 13–38. <a href="https://doi.org/10.1007/978-3-031-04083-2_2">https://doi.org/10.1007/978-3-031-04083-2_2</a>.
+</div>
+<div id="ref-palmerpenguins2020" class="csl-entry" role="doc-biblioentry">
+Horst, Allison Marie, Alison Presmanes Hill, and Kristen B Gorman. 2020. <em><span class="nocase">palmerpenguins: Palmer Archipelago (Antarctica) penguin data</span></em>. <a href="https://doi.org/10.5281/zenodo.3960218">https://doi.org/10.5281/zenodo.3960218</a>.
+</div>
+<div id="ref-Krzyzinski2023" class="csl-entry" role="doc-biblioentry">
+Krzyziński, Mateusz, Mikołaj Spytek, Hubert Baniecki, and Przemysław Biecek. 2023. <span>“<span class="nocase">SurvSHAP(t): Time-dependent explanations of machine learning survival models</span>.”</span> <em>Knowledge-Based Systems</em> 262: 110234. https://doi.org/<a href="https://doi.org/10.1016/j.knosys.2022.110234">https://doi.org/10.1016/j.knosys.2022.110234</a>.
+</div>
+<div id="ref-ONeil" class="csl-entry" role="doc-biblioentry">
+O’Neil, Cathy. 2016. <em><span class="nocase">Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy</span></em>. New York, NY: Crown Publishing Group.
+</div>
+<div id="ref-Romaszko2019" class="csl-entry" role="doc-biblioentry">
+Romaszko, Kamil, Magda Tatarynowicz, Mateusz Urbański, and Przemysław Biecek. 2019. <span>“modelDown: Automated Website Generator with Interpretable Documentation for Predictive Machine Learning Models.”</span> <em>Journal of Open Source Software</em> 4 (38): 1444. <a href="https://doi.org/10.21105/joss.01444">https://doi.org/10.21105/joss.01444</a>.
+</div>
+<div id="ref-Wisniewski2022" class="csl-entry" role="doc-biblioentry">
+Wiśniewski, Jakub, and Przemysław Biecek. 2022. <span>“The r Journal: Fairmodels: A Flexible Tool for Bias Detection, Visualization, and Mitigation in Binary Classification Models.”</span> <em>The R Journal</em> 14: 227–43. <a href="https://doi.org/10.32614/RJ-2022-019">https://doi.org/10.32614/RJ-2022-019</a>.
+</div>
+</div>
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./technical.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Technical</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./extending.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Extending</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb33" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Przemysław Biecek</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid: 0000-0001-8423-1823 </span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co">    email: przemyslaw.biecek@gmail.com</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliations:</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co">      - name: MI2.AI, Warsaw University of Technology</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Author 2</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid:</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co">    email:</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliations:</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - name: Affiliation 2</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="an">abstract:</span><span class="co"> </span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="co">  The goal of this chapter is to present key methods that allow in-depth posthoc analysis of an already trained model. </span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="co">  The methods presented are model-agnostic, i.e. they can be applied to models of different classes.</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="co">  When using predictive models in practice, it is often the case that high performance on a validation set is not enough. </span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a><span class="co">  Users more and more often want to know which variables are important and how they influence the model's predictions. </span></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a><span class="co">  For the end user, such knowledge allows better utilisation of models in the decision-making process, e.g. by analysing different possible decision options. </span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="co">  In addition, if the model's behaviour turns out to be in line with the domain knowledge or the user's intuition then the user's confidence in the prediction will increase. </span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="co">  For the modeller, an in-depth analysis of the model allows undesirable model behaviour to be detected and corrected.</span></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a><span class="fu"># Model Interpretation {#sec-interpretation}</span></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>{{&lt; include _setup.qmd &gt;}}</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>Predictive models have numerous applications in virtually every area of life. The increasing availability of data and frameworks to create models has allowed the widespread adoption of these solutions. However, this does not always go together with enough testing of the models and the consequences of incorrect predictions can be severe. The bestseller book ,,Weapons of Math Destruction'' <span class="co">[</span><span class="ot">@ONeil</span><span class="co">]</span> discusses examples of deployed black-boxes that have led to wrong-headed decisions, sometimes on a massive scale. So what can we do to make our models more thoroughly tested? The answer is methods that allow deeper interpretation of predictive models. In this chapter, we will provide illustrations of how to perform the most popular of these methods <span class="co">[</span><span class="ot">@Holzinger2022</span><span class="co">]</span>.</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>In principle, all generic frameworks for model interpretation apply to the models fitted with <span class="in">`r mlr3`</span> by just extracting the fitted models from the <span class="in">`r ref("Learner")`</span> objects.</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>However, two of the most popular frameworks additionally come with some convenience for <span class="in">`r mlr3`</span>, these are</span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`r ref_pkg("iml")`</span> presented in @sec-iml, and</span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`r ref_pkg("DALEX")`</span> presented in @sec-dalex.</span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>Both these packages offer similar functionality, but they differ in design choices. <span class="in">`r ref_pkg("iml")`</span> is based on the R6 class system and for this reason working with it is more similar in style to working with the <span class="in">`r ref_pkg("mlr3")`</span> package. <span class="in">`r ref_pkg("DALEX")`</span> is based on the S3 class system and is mainly focused on the ability to compare multiple different models on the same graph for comparison and on the explainable model analysis process.</span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Penguin Task  {#sec-penguin-task}</span></span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>To understand what model interpretation packages can offer, we start with a thorough example.</span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>The goal of this example is to figure out the species of penguins given a set of features.</span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>The <span class="in">`r ref("palmerpenguins::penguins")`</span> <span class="co">[</span><span class="ot">@palmerpenguins2020</span><span class="co">]</span> data set will be used which is an alternative to the <span class="in">`iris`</span> data set.</span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>The <span class="in">`penguins`</span> data sets contain 8 variables of 344 penguins:</span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-001, message=FALSE, warning=FALSE}</span></span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"penguins"</span>, <span class="at">package =</span> <span class="st">"palmerpenguins"</span>)</span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(penguins)</span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>To get started run:</span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-002, message=FALSE, warning=FALSE}</span></span>
+<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mlr3"</span>)</span>
+<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mlr3learners"</span>)</span>
+<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-003, message=FALSE, warning=FALSE}</span></span>
+<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">=</span> <span class="fu">na.omit</span>(penguins)</span>
+<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a>task_peng <span class="ot">=</span> <span class="fu">as_task_classif</span>(penguins, <span class="at">target =</span> <span class="st">"species"</span>)</span>
+<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a><span class="in">`penguins = na.omit(penguins)`</span> is to omit the 11 cases with missing values.</span>
+<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a>If not omitted, there will be an error when running the learner from the data points that have N/A for some features.</span>
+<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-004, message=FALSE, warning=FALSE}</span></span>
+<span id="cb33-68"><a href="#cb33-68" aria-hidden="true" tabindex="-1"></a>learner <span class="ot">=</span> <span class="fu">lrn</span>(<span class="st">"classif.ranger"</span>)</span>
+<span id="cb33-69"><a href="#cb33-69" aria-hidden="true" tabindex="-1"></a>learner<span class="sc">$</span>predict_type <span class="ot">=</span> <span class="st">"prob"</span></span>
+<span id="cb33-70"><a href="#cb33-70" aria-hidden="true" tabindex="-1"></a>learner<span class="sc">$</span><span class="fu">train</span>(task_peng)</span>
+<span id="cb33-71"><a href="#cb33-71" aria-hidden="true" tabindex="-1"></a>learner<span class="sc">$</span>model</span>
+<span id="cb33-72"><a href="#cb33-72" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> penguins[<span class="fu">which</span>(<span class="fu">names</span>(penguins) <span class="sc">!=</span> <span class="st">"species"</span>)]</span>
+<span id="cb33-73"><a href="#cb33-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-74"><a href="#cb33-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-75"><a href="#cb33-75" aria-hidden="true" tabindex="-1"></a>As explained in Section <span class="co">[</span><span class="ot">Learners</span><span class="co">](#learners)</span>, specific learners can be queried with <span class="in">`r ref("mlr_learners")`</span>.</span>
+<span id="cb33-76"><a href="#cb33-76" aria-hidden="true" tabindex="-1"></a>In Section <span class="co">[</span><span class="ot">Train/Predict</span><span class="co">](#train-predict)</span> it is recommended for some classifiers to use the <span class="in">`predict_type`</span> as <span class="in">`prob`</span> instead of directly predicting a label.</span>
+<span id="cb33-77"><a href="#cb33-77" aria-hidden="true" tabindex="-1"></a>This is what is done in this example.</span>
+<span id="cb33-78"><a href="#cb33-78" aria-hidden="true" tabindex="-1"></a><span class="in">`penguins[which(names(penguins) != "species")]`</span> is the data of all the features and <span class="in">`y`</span> will be the penguins<span class="in">`species`</span>.</span>
+<span id="cb33-79"><a href="#cb33-79" aria-hidden="true" tabindex="-1"></a><span class="in">`learner$train(task_peng)`</span> trains the model and <span class="in">`learner$model`</span> stores the model from the training command.</span>
+<span id="cb33-80"><a href="#cb33-80" aria-hidden="true" tabindex="-1"></a><span class="in">`Predictor`</span> holds the machine learning model and the data.</span>
+<span id="cb33-81"><a href="#cb33-81" aria-hidden="true" tabindex="-1"></a>All interpretation methods in <span class="in">`r ref_pkg("iml")`</span> need the machine learning model and the data to be wrapped in the <span class="in">`Predictor`</span> object.</span>
+<span id="cb33-82"><a href="#cb33-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-83"><a href="#cb33-83" aria-hidden="true" tabindex="-1"></a><span class="fu">## iml {#sec-iml}</span></span>
+<span id="cb33-84"><a href="#cb33-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-85"><a href="#cb33-85" aria-hidden="true" tabindex="-1"></a>Author: Shawn Storm</span>
+<span id="cb33-86"><a href="#cb33-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-87"><a href="#cb33-87" aria-hidden="true" tabindex="-1"></a><span class="in">`r ref_pkg("iml")`</span> is an R package that interprets the behaviour and explains predictions of machine learning models.</span>
+<span id="cb33-88"><a href="#cb33-88" aria-hidden="true" tabindex="-1"></a>The functions provided in the <span class="in">`r ref_pkg("iml")`</span> package are model-agnostic which gives the flexibility to use any machine learning model.</span>
+<span id="cb33-89"><a href="#cb33-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-90"><a href="#cb33-90" aria-hidden="true" tabindex="-1"></a>This chapter provides examples of how to use <span class="in">`r ref_pkg("iml")`</span> with <span class="in">`r mlr3`</span>.</span>
+<span id="cb33-91"><a href="#cb33-91" aria-hidden="true" tabindex="-1"></a>For more information refer to the  <span class="co">[</span><span class="ot">IML github</span><span class="co">](https://github.com/christophM/iml)</span> and the <span class="co">[</span><span class="ot">IML book</span><span class="co">](https://christophm.github.io/interpretable-ml-book/)</span></span>
+<span id="cb33-92"><a href="#cb33-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-93"><a href="#cb33-93" aria-hidden="true" tabindex="-1"></a>Next is the core functionality of <span class="in">`r ref_pkg("iml")`</span>.</span>
+<span id="cb33-94"><a href="#cb33-94" aria-hidden="true" tabindex="-1"></a>In this example, three separate interpretation methods will be used: <span class="co">[</span><span class="ot">FeatureEffects</span><span class="co">](https://github.com/christophM/iml/blob/master/R/FeatureEffects.R)</span>, <span class="co">[</span><span class="ot">FeatureImp</span><span class="co">](https://github.com/christophM/iml/blob/master/R/FeatureImp.R)</span> and <span class="co">[</span><span class="ot">Shapley</span><span class="co">](https://github.com/christophM/iml/blob/master/R/Shapley.R)</span></span>
+<span id="cb33-95"><a href="#cb33-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-96"><a href="#cb33-96" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`FeatureEffects`</span> computes the effects for all given features on the model prediction.</span>
+<span id="cb33-97"><a href="#cb33-97" aria-hidden="true" tabindex="-1"></a>  Different methods are implemented: <span class="co">[</span><span class="ot">Accumulated Local Effect (ALE) plots</span><span class="co">](https://christophm.github.io/interpretable-ml-book/ale.html)</span>, <span class="co">[</span><span class="ot">Partial Dependence Plots (PDPs)</span><span class="co">](https://christophm.github.io/interpretable-ml-book/pdp.html)</span> and <span class="co">[</span><span class="ot">Individual Conditional Expectation (ICE) curves</span><span class="co">](https://christophm.github.io/interpretable-ml-book/ice.html)</span>.</span>
+<span id="cb33-98"><a href="#cb33-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-99"><a href="#cb33-99" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`Shapley`</span> computes feature contributions for single predictions with the Shapley value -- an approach from cooperative game theory (<span class="co">[</span><span class="ot">Shapley Value</span><span class="co">](https://christophm.github.io/interpretable-ml-book/shapley.html)</span>).</span>
+<span id="cb33-100"><a href="#cb33-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-101"><a href="#cb33-101" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`FeatureImp`</span> computes the importance of features by calculating the increase in the model's prediction error after permuting the feature (more <span class="co">[</span><span class="ot">here</span><span class="co">](https://christophm.github.io/interpretable-ml-book/feature-importance.html#feature-importance)</span>).</span>
+<span id="cb33-102"><a href="#cb33-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-103"><a href="#cb33-103" aria-hidden="true" tabindex="-1"></a><span class="fu">### FeatureEffects</span></span>
+<span id="cb33-104"><a href="#cb33-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-105"><a href="#cb33-105" aria-hidden="true" tabindex="-1"></a>In addition to the commands above the following two need to be run:</span>
+<span id="cb33-106"><a href="#cb33-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-107"><a href="#cb33-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-005, message=FALSE, warning=FALSE, fig.cap='Plot of the results from FeatureEffects. FeatureEffects computes and plots feature effects of prediction models',  fig.align='center'}</span></span>
+<span id="cb33-108"><a href="#cb33-108" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"iml"</span>)</span>
+<span id="cb33-109"><a href="#cb33-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-110"><a href="#cb33-110" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> Predictor<span class="sc">$</span><span class="fu">new</span>(learner, <span class="at">data =</span> x, <span class="at">y =</span> penguins<span class="sc">$</span>species)</span>
+<span id="cb33-111"><a href="#cb33-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-112"><a href="#cb33-112" aria-hidden="true" tabindex="-1"></a>num_features <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span>, <span class="st">"flipper_length_mm"</span>, <span class="st">"body_mass_g"</span>, <span class="st">"year"</span>)</span>
+<span id="cb33-113"><a href="#cb33-113" aria-hidden="true" tabindex="-1"></a>effect <span class="ot">=</span> FeatureEffects<span class="sc">$</span><span class="fu">new</span>(model)</span>
+<span id="cb33-114"><a href="#cb33-114" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(effect, <span class="at">features =</span> num_features)</span>
+<span id="cb33-115"><a href="#cb33-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-116"><a href="#cb33-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-117"><a href="#cb33-117" aria-hidden="true" tabindex="-1"></a><span class="in">`effect`</span> stores the object from the <span class="in">`FeatureEffect`</span> computation and the results can then be plotted.</span>
+<span id="cb33-118"><a href="#cb33-118" aria-hidden="true" tabindex="-1"></a>In this example, all of the features provided by the <span class="in">`penguins`</span> data set were used.</span>
+<span id="cb33-119"><a href="#cb33-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-120"><a href="#cb33-120" aria-hidden="true" tabindex="-1"></a>All features except for <span class="in">`year`</span> provide meaningful interpretable information.</span>
+<span id="cb33-121"><a href="#cb33-121" aria-hidden="true" tabindex="-1"></a>It should be clear why <span class="in">`year`</span> doesn't provide anything of significance.</span>
+<span id="cb33-122"><a href="#cb33-122" aria-hidden="true" tabindex="-1"></a><span class="in">`bill_length_mm`</span> shows for example that when the bill length is smaller than roughly 40mm, there is a high chance that the penguin is an Adelie.</span>
+<span id="cb33-123"><a href="#cb33-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-124"><a href="#cb33-124" aria-hidden="true" tabindex="-1"></a><span class="fu">### Shapley</span></span>
+<span id="cb33-125"><a href="#cb33-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-126"><a href="#cb33-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-006, message=FALSE, warning=FALSE, fig.cap='Plot of the results from Shapley. $\\phi$ gives the increase or decrease in probability given the values on the vertical axis',  fig.align='center'}</span></span>
+<span id="cb33-127"><a href="#cb33-127" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> penguins[<span class="fu">which</span>(<span class="fu">names</span>(penguins) <span class="sc">!=</span> <span class="st">"species"</span>)]</span>
+<span id="cb33-128"><a href="#cb33-128" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> Predictor<span class="sc">$</span><span class="fu">new</span>(learner, <span class="at">data =</span> penguins, <span class="at">y =</span> <span class="st">"species"</span>)</span>
+<span id="cb33-129"><a href="#cb33-129" aria-hidden="true" tabindex="-1"></a>x.interest <span class="ot">=</span> <span class="fu">data.frame</span>(penguins[<span class="dv">1</span>, ])</span>
+<span id="cb33-130"><a href="#cb33-130" aria-hidden="true" tabindex="-1"></a>shapley <span class="ot">=</span> Shapley<span class="sc">$</span><span class="fu">new</span>(model, <span class="at">x.interest =</span> x.interest)</span>
+<span id="cb33-131"><a href="#cb33-131" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(shapley)</span>
+<span id="cb33-132"><a href="#cb33-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-133"><a href="#cb33-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-134"><a href="#cb33-134" aria-hidden="true" tabindex="-1"></a>The $\phi$ provides insight into the probability given the values on the vertical axis.</span>
+<span id="cb33-135"><a href="#cb33-135" aria-hidden="true" tabindex="-1"></a>For example, a penguin is less likely to be Gentoo if the bill<span class="sc">\_</span>depth=18.7 is and much more likely to be Adelie than Chinstrap.</span>
+<span id="cb33-136"><a href="#cb33-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-137"><a href="#cb33-137" aria-hidden="true" tabindex="-1"></a><span class="fu">### FeatureImp</span></span>
+<span id="cb33-138"><a href="#cb33-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-139"><a href="#cb33-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-007, message=FALSE, warning=FALSE, fig.cap='Plot of the results from FeatureImp. FeatureImp visualizes the importance of features given the prediction model',  fig.align='center'}</span></span>
+<span id="cb33-140"><a href="#cb33-140" aria-hidden="true" tabindex="-1"></a>effect <span class="ot">=</span> FeatureImp<span class="sc">$</span><span class="fu">new</span>(model, <span class="at">loss =</span> <span class="st">"ce"</span>)</span>
+<span id="cb33-141"><a href="#cb33-141" aria-hidden="true" tabindex="-1"></a>effect<span class="sc">$</span><span class="fu">plot</span>(<span class="at">features =</span> num_features)</span>
+<span id="cb33-142"><a href="#cb33-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-143"><a href="#cb33-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-144"><a href="#cb33-144" aria-hidden="true" tabindex="-1"></a><span class="in">`FeatureImp`</span> shows the level of importance of the features when classifying penguins.</span>
+<span id="cb33-145"><a href="#cb33-145" aria-hidden="true" tabindex="-1"></a>It is clear to see that the <span class="in">`bill_length_mm`</span> is of high importance and one should concentrate on the different boundaries of this feature when attempting to classify the three species.</span>
+<span id="cb33-146"><a href="#cb33-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-147"><a href="#cb33-147" aria-hidden="true" tabindex="-1"></a><span class="fu">### Independent Test Data</span></span>
+<span id="cb33-148"><a href="#cb33-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-149"><a href="#cb33-149" aria-hidden="true" tabindex="-1"></a>It is also interesting to see how well the model performs on a test data set.</span>
+<span id="cb33-150"><a href="#cb33-150" aria-hidden="true" tabindex="-1"></a>For this section, exactly as was recommended in Section <span class="co">[</span><span class="ot">Train/Predict</span><span class="co">](#train-predict)</span>, 80% of the penguin data set will be used for the training set and 20% for the test set:</span>
+<span id="cb33-151"><a href="#cb33-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-152"><a href="#cb33-152" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-008, message=FALSE, warning=FALSE}</span></span>
+<span id="cb33-153"><a href="#cb33-153" aria-hidden="true" tabindex="-1"></a>train_set <span class="ot">=</span> <span class="fu">sample</span>(task_peng<span class="sc">$</span>nrow, <span class="fl">0.8</span> <span class="sc">*</span> task_peng<span class="sc">$</span>nrow)</span>
+<span id="cb33-154"><a href="#cb33-154" aria-hidden="true" tabindex="-1"></a>test_set <span class="ot">=</span> <span class="fu">setdiff</span>(<span class="fu">seq_len</span>(task_peng<span class="sc">$</span>nrow), train_set)</span>
+<span id="cb33-155"><a href="#cb33-155" aria-hidden="true" tabindex="-1"></a>learner<span class="sc">$</span><span class="fu">train</span>(task_peng, <span class="at">row_ids =</span> train_set)</span>
+<span id="cb33-156"><a href="#cb33-156" aria-hidden="true" tabindex="-1"></a>prediction <span class="ot">=</span> learner<span class="sc">$</span><span class="fu">predict</span>(task_peng, <span class="at">row_ids =</span> test_set)</span>
+<span id="cb33-157"><a href="#cb33-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-158"><a href="#cb33-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-159"><a href="#cb33-159" aria-hidden="true" tabindex="-1"></a>First, we compare the feature importance on training and test set</span>
+<span id="cb33-160"><a href="#cb33-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-161"><a href="#cb33-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-009, message=FALSE, warning=FALSE, fig.cap='FeatImp on train (left) and test (right)',  fig.align='center'}</span></span>
+<span id="cb33-162"><a href="#cb33-162" aria-hidden="true" tabindex="-1"></a><span class="co"># plot on training</span></span>
+<span id="cb33-163"><a href="#cb33-163" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> Predictor<span class="sc">$</span><span class="fu">new</span>(learner, <span class="at">data =</span> penguins[train_set, ], <span class="at">y =</span> <span class="st">"species"</span>)</span>
+<span id="cb33-164"><a href="#cb33-164" aria-hidden="true" tabindex="-1"></a>effect <span class="ot">=</span> FeatureImp<span class="sc">$</span><span class="fu">new</span>(model, <span class="at">loss =</span> <span class="st">"ce"</span>)</span>
+<span id="cb33-165"><a href="#cb33-165" aria-hidden="true" tabindex="-1"></a>plot_train <span class="ot">=</span> <span class="fu">plot</span>(effect, <span class="at">features =</span> num_features)</span>
+<span id="cb33-166"><a href="#cb33-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-167"><a href="#cb33-167" aria-hidden="true" tabindex="-1"></a><span class="co"># plot on test data</span></span>
+<span id="cb33-168"><a href="#cb33-168" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> Predictor<span class="sc">$</span><span class="fu">new</span>(learner, <span class="at">data =</span> penguins[test_set, ], <span class="at">y =</span> <span class="st">"species"</span>)</span>
+<span id="cb33-169"><a href="#cb33-169" aria-hidden="true" tabindex="-1"></a>effect <span class="ot">=</span> FeatureImp<span class="sc">$</span><span class="fu">new</span>(model, <span class="at">loss =</span> <span class="st">"ce"</span>)</span>
+<span id="cb33-170"><a href="#cb33-170" aria-hidden="true" tabindex="-1"></a>plot_test <span class="ot">=</span> <span class="fu">plot</span>(effect, <span class="at">features =</span> num_features)</span>
+<span id="cb33-171"><a href="#cb33-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-172"><a href="#cb33-172" aria-hidden="true" tabindex="-1"></a><span class="co"># combine into single plot</span></span>
+<span id="cb33-173"><a href="#cb33-173" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"patchwork"</span>)</span>
+<span id="cb33-174"><a href="#cb33-174" aria-hidden="true" tabindex="-1"></a>plot_train <span class="sc">+</span> plot_test</span>
+<span id="cb33-175"><a href="#cb33-175" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-176"><a href="#cb33-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-177"><a href="#cb33-177" aria-hidden="true" tabindex="-1"></a>The results of the train set for <span class="in">`FeatureImp`</span> are very similar, which is expected.</span>
+<span id="cb33-178"><a href="#cb33-178" aria-hidden="true" tabindex="-1"></a>We follow a similar approach to compare the feature effects:</span>
+<span id="cb33-179"><a href="#cb33-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-180"><a href="#cb33-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-010, message=FALSE, warning=FALSE, fig.cap='FeatEffect train data set', fig.align='center'}</span></span>
+<span id="cb33-181"><a href="#cb33-181" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> Predictor<span class="sc">$</span><span class="fu">new</span>(learner, <span class="at">data =</span> penguins[train_set, ], <span class="at">y =</span> <span class="st">"species"</span>)</span>
+<span id="cb33-182"><a href="#cb33-182" aria-hidden="true" tabindex="-1"></a>effect <span class="ot">=</span> FeatureEffects<span class="sc">$</span><span class="fu">new</span>(model)</span>
+<span id="cb33-183"><a href="#cb33-183" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(effect, <span class="at">features =</span> num_features)</span>
+<span id="cb33-184"><a href="#cb33-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-185"><a href="#cb33-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-186"><a href="#cb33-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-011, message=FALSE, warning=FALSE, fig.cap='FeatEffect test data set',  fig.align='center'}</span></span>
+<span id="cb33-187"><a href="#cb33-187" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> Predictor<span class="sc">$</span><span class="fu">new</span>(learner, <span class="at">data =</span> penguins[test_set, ], <span class="at">y =</span> <span class="st">"species"</span>)</span>
+<span id="cb33-188"><a href="#cb33-188" aria-hidden="true" tabindex="-1"></a>effect <span class="ot">=</span> FeatureEffects<span class="sc">$</span><span class="fu">new</span>(model)</span>
+<span id="cb33-189"><a href="#cb33-189" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(effect, <span class="at">features =</span> num_features)</span>
+<span id="cb33-190"><a href="#cb33-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-191"><a href="#cb33-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-192"><a href="#cb33-192" aria-hidden="true" tabindex="-1"></a>As is the case with <span class="in">`FeatureImp`</span>, the test data results show either an over- or underestimate of feature importance / feature effects compared to the results where the entire penguin data set was used.</span>
+<span id="cb33-193"><a href="#cb33-193" aria-hidden="true" tabindex="-1"></a>This would be a good opportunity for the reader to attempt to resolve the estimation by playing with the amount of features and the amount of data used for both the test and train data sets of <span class="in">`FeatureImp`</span> and <span class="in">`FeatureEffects`</span>.</span>
+<span id="cb33-194"><a href="#cb33-194" aria-hidden="true" tabindex="-1"></a>Be sure to not change the line <span class="in">`train_set = sample(task_peng$nrow, 0.8 * task_peng$nrow)`</span> as it will randomly sample the data again.</span>
+<span id="cb33-195"><a href="#cb33-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-196"><a href="#cb33-196" aria-hidden="true" tabindex="-1"></a><span class="fu">## DALEX {#sec-dalex}</span></span>
+<span id="cb33-197"><a href="#cb33-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-198"><a href="#cb33-198" aria-hidden="true" tabindex="-1"></a>The <span class="in">`r ref_pkg("DALEX")`</span> <span class="co">[</span><span class="ot">@Biecek2018</span><span class="co">]</span> package belongs to <span class="co">[</span><span class="ot">DrWhy</span><span class="co">](https://www.drwhy.ai/)</span> family of solutions created to support the responsible development of machine learning models. It implements the most common methods for explaining predictive models using posthoc model agnostic techniques. You can use it for any model built with the <span class="in">`r ref_pkg("mlr3")`</span> package as well as with other frameworks in <span class="in">`R`</span>. The counterpart in <span class="in">`Python`</span> is the library <span class="in">`dalex`</span> <span class="co">[</span><span class="ot">@Baniecki2021</span><span class="co">]</span>.</span>
+<span id="cb33-199"><a href="#cb33-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-200"><a href="#cb33-200" aria-hidden="true" tabindex="-1"></a>The philosophy of working with <span class="in">`r ref_pkg("DALEX")`</span> package is based on the process of explanatory model analysis described in the <span class="co">[</span><span class="ot">EMA book</span><span class="co">](https://ema.drwhy.ai/)</span> <span class="co">[</span><span class="ot">@biecek_burzykowski_2021</span><span class="co">]</span>. In this chapter, we present code snippets and a general overview of this package. For illustrative purposes, we reuse the <span class="in">`learner`</span> model built in the @sec-penguin-task on <span class="in">`r ref("palmerpenguins::penguins")`</span> data.</span>
+<span id="cb33-201"><a href="#cb33-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-202"><a href="#cb33-202" aria-hidden="true" tabindex="-1"></a>Once you become familiar with the philosophy of working with the <span class="in">`r ref_pkg("DALEX")`</span> package, you can also use other packages from this family such as <span class="in">`r ref_pkg("fairmodels")`</span> <span class="co">[</span><span class="ot">@Wisniewski2022</span><span class="co">]</span> for detection and mitigation of biases, <span class="in">`r ref_pkg("modelStudio")`</span> <span class="co">[</span><span class="ot">@Baniecki2019</span><span class="co">]</span> for interactive model exploration, <span class="in">`r ref_pkg("modelDown")`</span> <span class="co">[</span><span class="ot">@Romaszko2019</span><span class="co">]</span> for the automatic generation of IML model documentation in the form of a report, <span class="in">`r ref_pkg("survex")`</span> <span class="co">[</span><span class="ot">@Krzyzinski2023</span><span class="co">]</span> for the explanation of survival models, or <span class="in">`r ref_pkg("treeshap")`</span> for the analysis of tree-based models.</span>
+<span id="cb33-203"><a href="#cb33-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-204"><a href="#cb33-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-205"><a href="#cb33-205" aria-hidden="true" tabindex="-1"></a><span class="fu">### Explanatory model analysis {#sec-interpretability-architecture}</span></span>
+<span id="cb33-206"><a href="#cb33-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-207"><a href="#cb33-207" aria-hidden="true" tabindex="-1"></a>The analysis of a model is usually an interactive process starting with a shallow analysis -- usually a single-number summary. Then in a series of subsequent steps, one can systematically deepen understanding of the model by exploring the importance of single variables or pairs of variables to an in-depth analysis of the relationship between selected variables to the model outcome. See @Bucker2022 for a broader discussion of what the model exploration process looks like.</span>
+<span id="cb33-208"><a href="#cb33-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-209"><a href="#cb33-209" aria-hidden="true" tabindex="-1"></a>This explanatory model analysis (EMA) process can focus on a single observation, in which case we speak of local model analysis, or for a set of observations, in which case we speak of global data analysis. Below, we will present these two scenarios in separate subsections. See @fig-dalex-fig-plot-01 for an overview of key functions that will be discussed.</span>
+<span id="cb33-210"><a href="#cb33-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-211"><a href="#cb33-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-212"><a href="#cb33-212" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-012, echo=FALSE, fig.cap='Taxonomy of methods for model exploration presented in this chapter. Left part overview methods for global level exploration while the right part is related to local level model exploration.', out.width = '92%', fig.align='center'}</span></span>
+<span id="cb33-213"><a href="#cb33-213" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dalex-fig-plot-01</span></span>
+<span id="cb33-214"><a href="#cb33-214" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"Figures/DALEX_ema_process.png"</span>)</span>
+<span id="cb33-215"><a href="#cb33-215" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-216"><a href="#cb33-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-217"><a href="#cb33-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-218"><a href="#cb33-218" aria-hidden="true" tabindex="-1"></a>Predictive models in R have different internal structures. To be able to analyse them systematically, an intermediate object -- a wrapper -- is needed to provide a consistent interface for accessing the model.</span>
+<span id="cb33-219"><a href="#cb33-219" aria-hidden="true" tabindex="-1"></a>Working with explanations in the <span class="in">`r ref_pkg("DALEX")`</span> package always starts with the creation of such a wrapper with the use of the <span class="in">`r ref("DALEX::explain()")`</span> function. This function has several arguments that allow the model created by the various frameworks to be parameterised accordingly. For models created in the <span class="in">`r mlr3`</span> package, it is more convenient to use the <span class="in">`r ref("DALEXtra::explain_mlr3()")`</span>.</span>
+<span id="cb33-220"><a href="#cb33-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-221"><a href="#cb33-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-019, message=FALSE, warning=FALSE}</span></span>
+<span id="cb33-222"><a href="#cb33-222" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"DALEX"</span>)</span>
+<span id="cb33-223"><a href="#cb33-223" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"DALEXtra"</span>)</span>
+<span id="cb33-224"><a href="#cb33-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-225"><a href="#cb33-225" aria-hidden="true" tabindex="-1"></a>ranger_exp <span class="ot">=</span> DALEX<span class="sc">::</span><span class="fu">explain</span>(learner,</span>
+<span id="cb33-226"><a href="#cb33-226" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> penguins[test_set, ],</span>
+<span id="cb33-227"><a href="#cb33-227" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> penguins[test_set, <span class="st">"species"</span>],</span>
+<span id="cb33-228"><a href="#cb33-228" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"Ranger Penguins"</span>,</span>
+<span id="cb33-229"><a href="#cb33-229" aria-hidden="true" tabindex="-1"></a>  <span class="at">colorize =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb33-230"><a href="#cb33-230" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-231"><a href="#cb33-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-232"><a href="#cb33-232" aria-hidden="true" tabindex="-1"></a>The <span class="in">`r ref("DALEX::explain()")`</span> function performs a series of internal checks so the output is a bit verbose. Turn the <span class="in">`verbose = FALSE`</span> argument to make it less wordy.</span>
+<span id="cb33-233"><a href="#cb33-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-234"><a href="#cb33-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-235"><a href="#cb33-235" aria-hidden="true" tabindex="-1"></a><span class="fu">### Global level exploration {#sec-interpretability-dataset-level}</span></span>
+<span id="cb33-236"><a href="#cb33-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-237"><a href="#cb33-237" aria-hidden="true" tabindex="-1"></a>The global model analysis aims to understand how a model behaves on average on a set of observations, most commonly a test set.  In the <span class="in">`r ref_pkg("DALEX")`</span> package, functions for global analysis have names starting with the prefix <span class="in">`model_`</span>.</span>
+<span id="cb33-238"><a href="#cb33-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-239"><a href="#cb33-239" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Model Performance</span></span>
+<span id="cb33-240"><a href="#cb33-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-241"><a href="#cb33-241" aria-hidden="true" tabindex="-1"></a>As shown in Figure @fig-dalex-fig-plot-01, it starts by evaluating the performance of a model. This can be done with a variety of tools, in the <span class="in">`r ref_pkg("DALEX")`</span> package the default is to use the <span class="in">`r ref("DALEX::model_performance")`</span> function. Since the <span class="in">`explain`</span> function checks what type of task is being analysed, it can select the appropriate performance measures for it. In our illustration, we have a multi-label classification, so measures such as micro-aggregated F1, macro-aggregated F1 etc. are calculated in the following snippet. One of the calculated measures is cross entropy and it will be used later in the following sections.</span>
+<span id="cb33-242"><a href="#cb33-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-243"><a href="#cb33-243" aria-hidden="true" tabindex="-1"></a>Each explanation can be drawn with the generic <span class="in">`plot()`</span> function, for multi-label classification the distribution of residuals is drawn by default. </span>
+<span id="cb33-244"><a href="#cb33-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-245"><a href="#cb33-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-020a, message=FALSE, warning=FALSE, fig.width=6, fig.height=5, out.width = '60%', fig.align='center'}</span></span>
+<span id="cb33-246"><a href="#cb33-246" aria-hidden="true" tabindex="-1"></a>perf_penguin <span class="ot">=</span> <span class="fu">model_performance</span>(ranger_exp)</span>
+<span id="cb33-247"><a href="#cb33-247" aria-hidden="true" tabindex="-1"></a>perf_penguin</span>
+<span id="cb33-248"><a href="#cb33-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-249"><a href="#cb33-249" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb33-250"><a href="#cb33-250" aria-hidden="true" tabindex="-1"></a>old_theme <span class="ot">=</span> <span class="fu">set_theme_dalex</span>(<span class="st">"ema"</span>) </span>
+<span id="cb33-251"><a href="#cb33-251" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(perf_penguin)</span>
+<span id="cb33-252"><a href="#cb33-252" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-253"><a href="#cb33-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-254"><a href="#cb33-254" aria-hidden="true" tabindex="-1"></a>The task of classifying the penguin species is rather easy, which is why there are so many values of 1 in the performance assessment of this model.</span>
+<span id="cb33-255"><a href="#cb33-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-256"><a href="#cb33-256" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Permutational Variable Importance</span></span>
+<span id="cb33-257"><a href="#cb33-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-258"><a href="#cb33-258" aria-hidden="true" tabindex="-1"></a>A popular technique for assessing variable importance in a model-agnostic manner is the permutation variable importance. It is based on the difference (or ratio) in the selected loss function after the selected variable or set of variables has been permuted. Read more about this technique in <span class="co">[</span><span class="ot">Variable-importance Measures</span><span class="co">](https://ema.drwhy.ai/featureImportance.html)</span> chapter.</span>
+<span id="cb33-259"><a href="#cb33-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-260"><a href="#cb33-260" aria-hidden="true" tabindex="-1"></a>The <span class="in">`r ref("DALEX::model_parts()")`</span> function calculates the importance of variables and its results can be visualized with the generic <span class="in">`plot()`</span> function.</span>
+<span id="cb33-261"><a href="#cb33-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-262"><a href="#cb33-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-021, message=FALSE, warning=FALSE, fig.width=8, fig.height=4, out.width = '90%', fig.align='center'}</span></span>
+<span id="cb33-263"><a href="#cb33-263" aria-hidden="true" tabindex="-1"></a>ranger_effect <span class="ot">=</span> <span class="fu">model_parts</span>(ranger_exp)</span>
+<span id="cb33-264"><a href="#cb33-264" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ranger_effect)</span>
+<span id="cb33-265"><a href="#cb33-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-266"><a href="#cb33-266" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ranger_effect, <span class="at">show_boxplots =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb33-267"><a href="#cb33-267" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-268"><a href="#cb33-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-269"><a href="#cb33-269" aria-hidden="true" tabindex="-1"></a>The bars start in loss (here cross-entropy loss) for the selected data and end in a loss for the data after the permutation of the selected variable. The more important the variable, the more the model will lose after its permutation.</span>
+<span id="cb33-270"><a href="#cb33-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-271"><a href="#cb33-271" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Partial Dependence </span></span>
+<span id="cb33-272"><a href="#cb33-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-273"><a href="#cb33-273" aria-hidden="true" tabindex="-1"></a>Once we know which variables are most important, we can use <span class="co">[</span><span class="ot">Partial Dependence Plots</span><span class="co">](https://ema.drwhy.ai/partialDependenceProfiles.html)</span> to show how the model, on average, changes with changes in selected variables.</span>
+<span id="cb33-274"><a href="#cb33-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-275"><a href="#cb33-275" aria-hidden="true" tabindex="-1"></a>The <span class="in">`r ref("DALEX::model_profile()")`</span> function calculates the partial dependence profiles. The <span class="in">`type`</span> argument of this function also allows *Marginal profiles* and *Accumulated Local profiles* to be calculated. Again, the result of the explanation can be model_profile with the generic function <span class="in">`plot()`</span>.</span>
+<span id="cb33-276"><a href="#cb33-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-277"><a href="#cb33-277" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-024, message=FALSE, warning=FALSE, fig.width=8, fig.height=7, out.width = '90%', fig.align='center'}</span></span>
+<span id="cb33-278"><a href="#cb33-278" aria-hidden="true" tabindex="-1"></a>ranger_profiles <span class="ot">=</span> <span class="fu">model_profile</span>(ranger_exp)</span>
+<span id="cb33-279"><a href="#cb33-279" aria-hidden="true" tabindex="-1"></a>ranger_profiles</span>
+<span id="cb33-280"><a href="#cb33-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-281"><a href="#cb33-281" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ranger_profiles) <span class="sc">+</span> </span>
+<span id="cb33-282"><a href="#cb33-282" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span> </span>
+<span id="cb33-283"><a href="#cb33-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Partial Dependence for Penguins"</span>,<span class="st">""</span>)</span>
+<span id="cb33-284"><a href="#cb33-284" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-285"><a href="#cb33-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-286"><a href="#cb33-286" aria-hidden="true" tabindex="-1"></a>For the multi-label classification model, profiles are drawn for each class separately by indicating them with different colours. We already know which variable is the most important, so now we can read how the model result changes with the change of this variable. In our example, based on <span class="in">`bill_length_mm`</span> we can separate *Adelie* from *Chinstrap* and based on `flipper_length_mm` we can separate *Adelie* from *Gentoo*.</span>
+<span id="cb33-287"><a href="#cb33-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-288"><a href="#cb33-288" aria-hidden="true" tabindex="-1"></a><span class="fu">### Local level explanation {#sec-interpretability-instance-level}</span></span>
+<span id="cb33-289"><a href="#cb33-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-290"><a href="#cb33-290" aria-hidden="true" tabindex="-1"></a>The local model analysis aims to understand how a model behaves for a single observation.  In the <span class="in">`r ref_pkg("DALEX")`</span> package, functions for local analysis have names starting with the prefix <span class="in">`predict_`</span>.</span>
+<span id="cb33-291"><a href="#cb33-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-292"><a href="#cb33-292" aria-hidden="true" tabindex="-1"></a>We will carry out the following examples using Steve the penguin of the <span class="in">`Adelie`</span> species as an example.</span>
+<span id="cb33-293"><a href="#cb33-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-294"><a href="#cb33-294" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-025a, message=FALSE, warning=FALSE}</span></span>
+<span id="cb33-295"><a href="#cb33-295" aria-hidden="true" tabindex="-1"></a>steve <span class="ot">=</span> penguins[<span class="dv">1</span>,]</span>
+<span id="cb33-296"><a href="#cb33-296" aria-hidden="true" tabindex="-1"></a>steve</span>
+<span id="cb33-297"><a href="#cb33-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-298"><a href="#cb33-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-299"><a href="#cb33-299" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Model Prediction</span></span>
+<span id="cb33-300"><a href="#cb33-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-301"><a href="#cb33-301" aria-hidden="true" tabindex="-1"></a>As shown in Figure @fig-dalex-fig-plot-01, the local analysis starts with the calculation of a model prediction.  </span>
+<span id="cb33-302"><a href="#cb33-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-303"><a href="#cb33-303" aria-hidden="true" tabindex="-1"></a>For Steve, the species was correctly predicted as <span class="in">`Adelie`</span> with high probability.</span>
+<span id="cb33-304"><a href="#cb33-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-305"><a href="#cb33-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-025, message=FALSE, warning=FALSE}</span></span>
+<span id="cb33-306"><a href="#cb33-306" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ranger_exp, steve)</span>
+<span id="cb33-307"><a href="#cb33-307" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-308"><a href="#cb33-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-309"><a href="#cb33-309" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Break Down </span></span>
+<span id="cb33-310"><a href="#cb33-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-311"><a href="#cb33-311" aria-hidden="true" tabindex="-1"></a>A popular technique for assessing the contributions of variables to model prediction is Break Down (see <span class="co">[</span><span class="ot">Introduction to Break Down</span><span class="co">](https://ema.drwhy.ai/breakDown.html)</span> chapter for more information about this method).</span>
+<span id="cb33-312"><a href="#cb33-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-313"><a href="#cb33-313" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`r ref("DALEX::predict_parts()")`</span> function calculates the attributions of variables and its results can be visualized with the generic <span class="in">`plot()`</span> function.</span>
+<span id="cb33-314"><a href="#cb33-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-315"><a href="#cb33-315" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-027, message=FALSE, warning=FALSE, fig.width=8, fig.height=5.5, out.width = '90%', fig.align='center'}</span></span>
+<span id="cb33-316"><a href="#cb33-316" aria-hidden="true" tabindex="-1"></a>ranger_attributions <span class="ot">=</span> <span class="fu">predict_parts</span>(ranger_exp, <span class="at">new_observation =</span> steve)</span>
+<span id="cb33-317"><a href="#cb33-317" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ranger_attributions) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Break Down for Steve"</span>) </span>
+<span id="cb33-318"><a href="#cb33-318" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-319"><a href="#cb33-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-320"><a href="#cb33-320" aria-hidden="true" tabindex="-1"></a>Looking at the plots above, we can read that the biggest contributors to the final prediction were for Steve the variables bill length and flipper.</span>
+<span id="cb33-321"><a href="#cb33-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-322"><a href="#cb33-322" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Shapley Values</span></span>
+<span id="cb33-323"><a href="#cb33-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-324"><a href="#cb33-324" aria-hidden="true" tabindex="-1"></a>By far the most popular technique for local model exploration <span class="co">[</span><span class="ot">@Holzinger2022</span><span class="co">]</span> is Shapley values and the most popular algorithm for estimating these values is the SHAP algorithm. Find a detailed description of the method and algorithm in the chapter <span class="co">[</span><span class="ot">SHapley Additive exPlanations (SHAP)</span><span class="co">](https://ema.drwhy.ai/shapley.html)</span>.</span>
+<span id="cb33-325"><a href="#cb33-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-326"><a href="#cb33-326" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`r ref("DALEX::predict_parts()")`</span> calculates SHAP attributions, you just need to set <span class="in">`type = "shap"`</span>. Its results can be visualized with a generic <span class="in">`plot()`</span> function.</span>
+<span id="cb33-327"><a href="#cb33-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-328"><a href="#cb33-328" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-028, message=FALSE, warning=FALSE, fig.width=8, fig.height=5.5, out.width = '90%', fig.align='center'}</span></span>
+<span id="cb33-329"><a href="#cb33-329" aria-hidden="true" tabindex="-1"></a>ranger_shap <span class="ot">=</span> <span class="fu">predict_parts</span>(ranger_exp, <span class="at">new_observation =</span> steve, </span>
+<span id="cb33-330"><a href="#cb33-330" aria-hidden="true" tabindex="-1"></a>             <span class="at">type =</span> <span class="st">"shap"</span>)</span>
+<span id="cb33-331"><a href="#cb33-331" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ranger_shap, <span class="at">show_boxplots =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb33-332"><a href="#cb33-332" aria-hidden="true" tabindex="-1"></a>             <span class="fu">ggtitle</span>(<span class="st">"Shapley values for Steve"</span>, <span class="st">""</span>) </span>
+<span id="cb33-333"><a href="#cb33-333" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-334"><a href="#cb33-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-335"><a href="#cb33-335" aria-hidden="true" tabindex="-1"></a>The results for Break Down and SHAP methods are generally similar. Differences will emerge if there are many complex interactions in the model.</span>
+<span id="cb33-336"><a href="#cb33-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-337"><a href="#cb33-337" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Ceteris Paribus </span></span>
+<span id="cb33-338"><a href="#cb33-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-339"><a href="#cb33-339" aria-hidden="true" tabindex="-1"></a>In the previous section, we've introduced a global explanation -- Partial Dependence plots.</span>
+<span id="cb33-340"><a href="#cb33-340" aria-hidden="true" tabindex="-1"></a>Ceteris Paribus plots are the local level version of that plot. Read more about this technique in the chapter <span class="co">[</span><span class="ot">Ceteris Paribus</span><span class="co">](https://ema.drwhy.ai/ceterisParibus.html)</span> and note that these profiles are also called Individual Conditional Expectations (ICE). They show the response of a model when only one variable is changed while others stay unchanged.</span>
+<span id="cb33-341"><a href="#cb33-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-342"><a href="#cb33-342" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`r ref("DALEX::predict_profile()")`</span> calculates Ceteris paribus profiles which can be visualized with the generic <span class="in">`plot()`</span> function.</span>
+<span id="cb33-343"><a href="#cb33-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-344"><a href="#cb33-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-345"><a href="#cb33-345" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interpretation-029, message=FALSE, warning=FALSE, fig.width=8, fig.height=6, out.width = '90%', fig.align='center'}</span></span>
+<span id="cb33-346"><a href="#cb33-346" aria-hidden="true" tabindex="-1"></a>ranger_ceteris <span class="ot">=</span> <span class="fu">predict_profile</span>(ranger_exp, steve)</span>
+<span id="cb33-347"><a href="#cb33-347" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ranger_ceteris) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Ceteris paribus for Steve"</span>, <span class="st">" "</span>) </span>
+<span id="cb33-348"><a href="#cb33-348" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-349"><a href="#cb33-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-350"><a href="#cb33-350" aria-hidden="true" tabindex="-1"></a>Blue dot stands for the prediction for Steve. Only a big change in bill length could convince the model of Steve's different species.</span>
+<span id="cb33-351"><a href="#cb33-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-352"><a href="#cb33-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-353"><a href="#cb33-353" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises</span></span>
+<span id="cb33-354"><a href="#cb33-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-355"><a href="#cb33-355" aria-hidden="true" tabindex="-1"></a>Model explanation allows us to confront our expert knowledge related to the problem with relations learned by the model. </span>
+<span id="cb33-356"><a href="#cb33-356" aria-hidden="true" tabindex="-1"></a>Following tasks are based on predictions of the value of football players based on data from the FIFA game. </span>
+<span id="cb33-357"><a href="#cb33-357" aria-hidden="true" tabindex="-1"></a>It is a graceful example, as most people have some intuition about how a footballer's age or skill can affect their value. </span>
+<span id="cb33-358"><a href="#cb33-358" aria-hidden="true" tabindex="-1"></a>The latest FIFA statistics can be downloaded from <span class="co">[</span><span class="ot">kaggle.com</span><span class="co">](https://www.kaggle.com/)</span>, but also one can use the 2020 data avaliable in the <span class="in">`DALEX`</span> packages(see <span class="in">`DALEX::fifa`</span> dataset).</span>
+<span id="cb33-359"><a href="#cb33-359" aria-hidden="true" tabindex="-1"></a>The following exercises can be performed in both the <span class="in">`iml`</span> and <span class="in">`DALEX`</span> packages and we have provided solutions for both.</span>
+<span id="cb33-360"><a href="#cb33-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-361"><a href="#cb33-361" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Prepare a <span class="in">`mlr3`</span> regression task for <span class="in">`fifa`</span> data. Select only variables describing the age and skills of footballers. Train any predictive model for this task, e.g. <span class="in">`regr.ranger`</span>.</span>
+<span id="cb33-362"><a href="#cb33-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-363"><a href="#cb33-363" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Use the permutation importance method to calculate variable importance ranking. Which variable is the most important? Is it surprising?</span>
+<span id="cb33-364"><a href="#cb33-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-365"><a href="#cb33-365" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Use the Partial Dependence profile to draw the global behavior of the model for this variable. Is it aligned with your expectations?</span>
+<span id="cb33-366"><a href="#cb33-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-367"><a href="#cb33-367" aria-hidden="true" tabindex="-1"></a>4 Choose one of the football players. You can choose some well-known striker (e.g. Robert Lewandowski) or a well-known goalkeeper (e.g. Manuel Neuer). The following tasks are worth repeating for several different choices. </span>
+<span id="cb33-368"><a href="#cb33-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-369"><a href="#cb33-369" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>For the selected footballer, calculate and plot the Shapley values. Which variable is locally the most important and has the strongest influence on the valuation of the footballer?</span>
+<span id="cb33-370"><a href="#cb33-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-371"><a href="#cb33-371" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>For the selected footballer, calculate the Ceteris Paribus / Individual Conditional Expectatons profiles to draw the local behaviour of the model for this variable. Is it different from the global behaviour?</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">All content licenced under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</div>   
+      <div class="nav-footer-center"><a href="https://mlr-org.com">Website</a> | <a href="https://github.com/mlr-org/mlr3book">GitHub</a> | <a href="https://mlr-org.com/gallery">Gallery</a> | <a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/">Mattermost</a></div>
+    <div class="nav-footer-right">Written with <i class="bi bi-heart-fill"></i> for #rstats, ML and FOSS by the mlr-org team.</div>
+  </div>
+</footer>
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

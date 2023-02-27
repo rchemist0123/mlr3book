@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Flexible and Robust Machine Learning Using mlr3 in R - Preface</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./intro.html" rel="next">
+<link href="./index.html" rel="prev">
+<link href="./favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<script async="" src="https://hypothes.is/embed.js"></script>
+</head>
+<body class="nav-sidebar floating slimcontent">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Preface</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Flexible and Robust Machine Learning Using mlr3 in R</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/mlr-org/mlr3book/tree/main/book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="./Flexible-and-Robust-Machine-Learning-Using-mlr3-in-R.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Getting Started</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link active">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction and Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fundamentals</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./performance.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Resampling and Benchmarking</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hyperparameter Optimization</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feature-selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Feature Selection</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pipelines.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipelines</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preprocessing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Preprocessing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./special.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Special Tasks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./technical.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Technical</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./interpretation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Model Interpretation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./extending.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Extending</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Appendices</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solutions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Solutions to exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tasks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Tasks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview-tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Overview Tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./session.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Session Info</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#howtouse" id="toc-howtouse" class="nav-link active" data-scroll-target="#howtouse">How to use this book</a></li>
+  <li><a href="#installguide" id="toc-installguide" class="nav-link" data-scroll-target="#installguide">Installation guidelines</a></li>
+  <li><a href="#community-links" id="toc-community-links" class="nav-link" data-scroll-target="#community-links">Community links</a></li>
+  <li><a href="#citeus" id="toc-citeus" class="nav-link" data-scroll-target="#citeus">Citation info</a></li>
+  <li><a href="#styleguide" id="toc-styleguide" class="nav-link" data-scroll-target="#styleguide">mlr3book style guide</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mlr-org/mlr3book/edit/main/book/preface.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/mlr-org/mlr3book/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/mlr-org/mlr3book/blob/main/book/preface.qmd" class="toc-action">View source</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Preface</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><div class="cell" data-hash="preface_cache/html/C0 seed_eb4a15c7fbbe0236f1b9205ca620a91b">
+
+</div>
+<p>Welcome to the Machine Learning in R universe (mlr3verse)! Before we begin, make sure you have installed <a href="https://mlr3.mlr-org.com"><code>mlr3</code></a> if you want to follow along. We recommend installing the complete <a href="https://mlr3verse.mlr-org.com"><code>mlr3verse</code></a>, which will install all of the important packages.</p>
+<div class="cell" data-hash="preface_cache/html/C0 install mlr3verse_3152b8496b4d074f8094c9fc459e25de">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="st">"mlr3verse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Or you can install just the base package:</p>
+<div class="cell" data-hash="preface_cache/html/C0 install mlr3_e21b156ea199241f057b055b06963f14">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">install.packages</span>(<span class="st">"mlr3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In our first example, we will show you some of the most basic functionality – training a model and making predictions.</p>
+<div class="cell" data-hash="preface_cache/html/C0 egBasic_58f99a1f6946e8a5489b0560dc6456ce">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(mlr3)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>task <span class="ot">=</span> <span class="fu">tsk</span>(<span class="st">"penguins"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>split <span class="ot">=</span> <span class="fu">partition</span>(task)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>learner <span class="ot">=</span> <span class="fu">lrn</span>(<span class="st">"classif.rpart"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a></span>
+<span id="cb3-6"><a href="#cb3-6"></a>learner<span class="sc">$</span><span class="fu">train</span>(task, <span class="at">row_ids =</span> split<span class="sc">$</span>train)</span>
+<span id="cb3-7"><a href="#cb3-7"></a>learner<span class="sc">$</span>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>n= 231 
+
+node), split, n, loss, yval, (yprob)
+      * denotes terminal node
+
+1) root 231 129 Adelie (0.441558442 0.199134199 0.359307359)  
+  2) flipper_length&lt; 207.5 145  44 Adelie (0.696551724 0.296551724 0.006896552)  
+    4) bill_length&lt; 44.65 100   2 Adelie (0.980000000 0.020000000 0.000000000) *
+    5) bill_length&gt;=44.65 45   4 Chinstrap (0.066666667 0.911111111 0.022222222) *
+  3) flipper_length&gt;=207.5 86   4 Gentoo (0.011627907 0.034883721 0.953488372) *</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>predictions <span class="ot">=</span> learner<span class="sc">$</span><span class="fu">predict</span>(task, <span class="at">row_ids =</span> split<span class="sc">$</span>test)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>predictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;PredictionClassif&gt; for 113 observations:
+    row_ids     truth  response
+          3    Adelie    Adelie
+          4    Adelie    Adelie
+          5    Adelie    Adelie
+---                            
+        341 Chinstrap    Adelie
+        343 Chinstrap    Gentoo
+        344 Chinstrap Chinstrap</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>predictions<span class="sc">$</span><span class="fu">score</span>(<span class="fu">msr</span>(<span class="st">"classif.acc"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>classif.acc 
+  0.9380531 </code></pre>
+</div>
+</div>
+<p>In this example, we trained a decision tree on a subset of the <code>penguins</code> dataset, made predictions on the rest of the data and then evaluated these with the accuracy measure. In <a href="basics.html"><span>Chapter&nbsp;2</span></a> we will break this down in more detail.</p>
+<p><a href="https://mlr3.mlr-org.com"><code>mlr3</code></a> makes training and predicting easy, but it also allows us to perform very complex operations in just a few lines of code:</p>
+<div class="cell" data-hash="preface_cache/html/C0 egHard_5efd14e4a0cd7514aa8955570dd8b20a">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(mlr3verse)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">library</span>(mlr3pipelines)</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="fu">library</span>(mlr3benchmark)</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a>tasks <span class="ot">=</span> <span class="fu">tsks</span>(<span class="fu">c</span>(<span class="st">"breast_cancer"</span>, <span class="st">"sonar"</span>))</span>
+<span id="cb9-6"><a href="#cb9-6"></a>tuned_rf <span class="ot">=</span> <span class="fu">auto_tuner</span>(</span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="fu">tnr</span>(<span class="st">"grid_search"</span>, <span class="at">resolution =</span> <span class="dv">5</span>),</span>
+<span id="cb9-8"><a href="#cb9-8"></a>    <span class="fu">lrn</span>(<span class="st">"classif.ranger"</span>, <span class="at">num.trees =</span> <span class="fu">to_tune</span>(<span class="dv">200</span>, <span class="dv">500</span>)),</span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="fu">rsmp</span>(<span class="st">"holdout"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10"></a>)</span>
+<span id="cb9-11"><a href="#cb9-11"></a>tuned_rf <span class="ot">=</span> <span class="fu">pipeline_robustify</span>(<span class="cn">NULL</span>, tuned_rf, <span class="cn">TRUE</span>) <span class="sc">%&gt;&gt;%</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>    <span class="fu">po</span>(<span class="st">"learner"</span>, tuned_rf)</span>
+<span id="cb9-13"><a href="#cb9-13"></a>stack_lrn <span class="ot">=</span> <span class="fu">ppl</span>(</span>
+<span id="cb9-14"><a href="#cb9-14"></a>    <span class="st">"stacking"</span>,</span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="at">base_learners =</span> <span class="fu">lrns</span>(<span class="fu">c</span>(<span class="st">"classif.rpart"</span>, <span class="st">"classif.kknn"</span>)),</span>
+<span id="cb9-16"><a href="#cb9-16"></a>    <span class="fu">lrn</span>(<span class="st">"classif.log_reg"</span>))</span>
+<span id="cb9-17"><a href="#cb9-17"></a>stack_lrn <span class="ot">=</span> <span class="fu">pipeline_robustify</span>(<span class="cn">NULL</span>, stack_lrn, <span class="cn">TRUE</span>) <span class="sc">%&gt;&gt;%</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a>    <span class="fu">po</span>(<span class="st">"learner"</span>, stack_lrn)</span>
+<span id="cb9-19"><a href="#cb9-19"></a></span>
+<span id="cb9-20"><a href="#cb9-20"></a>learners <span class="ot">=</span> <span class="fu">c</span>(tuned_rf, stack_lrn)</span>
+<span id="cb9-21"><a href="#cb9-21"></a>bm <span class="ot">=</span> <span class="fu">benchmark</span>(<span class="fu">benchmark_grid</span>(tasks, learners, <span class="fu">rsmp</span>(<span class="st">"holdout"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="preface_cache/html/C0 egHardOut_863d268020de0d2e56932017f1d7abe9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>bma <span class="ot">=</span> bm<span class="sc">$</span><span class="fu">aggregate</span>(<span class="fu">msr</span>(<span class="st">"classif.acc"</span>))[, <span class="fu">c</span>(<span class="st">"task_id"</span>, <span class="st">"learner_id"</span>,</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="st">"classif.acc"</span>)]</span>
+<span id="cb10-3"><a href="#cb10-3"></a>bma<span class="sc">$</span>learner_id <span class="ot">=</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"RF"</span>, <span class="st">"Stack"</span>), <span class="dv">2</span>)</span>
+<span id="cb10-4"><a href="#cb10-4"></a>bma</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         task_id learner_id classif.acc
+1: breast_cancer         RF   0.9605263
+2: breast_cancer      Stack   0.9122807
+3:         sonar         RF   0.7681159
+4:         sonar      Stack   0.7101449</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">as.BenchmarkAggr</span>(bm)<span class="sc">$</span><span class="fu">friedman_test</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Friedman rank sum test
+
+data:  ce and learner_id and task_id
+Friedman chi-squared = 2, df = 1, p-value = 0.1573</code></pre>
+</div>
+</div>
+<p>In this (much more complex!) example we chose two tasks and two machine learning (ML) algorithms (“learners” in <a href="https://mlr3.mlr-org.com"><code>mlr3</code></a> terms). We used automated tuning to optimize the number of trees in the random forest learner (<a href="optimization.html"><span>Chapter&nbsp;4</span></a>) and a ML pipeline that imputes missing data, collapses factor levels, and creates stacked models (<a href="pipelines.html"><span>Chapter&nbsp;6</span></a>). We also showed basic features like loading learners (<a href="basics.html"><span>Chapter&nbsp;2</span></a>) and choosing resampling strategies for benchmarking (<a href="performance.html"><span>Chapter&nbsp;3</span></a>). Finally, we compared the performance of the models using the mean accuracy on the test set, and applied a statistical test to see if the learners performed significantly different (they did not!).</p>
+<p>You will learn how to do all this and more in this book. We will walk through the functionality offered by <a href="https://mlr3.mlr-org.com"><code>mlr3</code></a> and the packages in the <a href="https://mlr3verse.mlr-org.com"><code>mlr3verse</code></a> step by step. There are a few different ways you can use this book, which we will discuss next.</p>
+<section id="howtouse" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="howtouse">How to use this book</h2>
+<p>The mlr3 ecosystem is the result of many years of methodological and applied research and improving the design and implementation of the packages over the years. This book describes the resulting features of the <a href="https://mlr3verse.mlr-org.com"><code>mlr3verse</code></a> and discusses best practices for ML, technical implementation details, extension guidelines, and in-depth considerations for optimizing ML. It is suitable for a wide range of readers and levels of ML expertise.</p>
+<p><a href="intro.html"><span>Chapter&nbsp;1</span></a>, <a href="basics.html"><span>Chapter&nbsp;2</span></a>, and <a href="performance.html"><span>Chapter&nbsp;3</span></a> cover the basics of mlr3. These chapters are essential to understanding the core infrastrucure of ML in mlr3. We recommend that all readers study these chapters to become familiar with basic mlr3 terminology, syntax, and style. <a href="optimization.html"><span>Chapter&nbsp;4</span></a>, <a href="feature-selection.html"><span>Chapter&nbsp;5</span></a>, and <a href="pipelines.html"><span>Chapter&nbsp;6</span></a> contain more advanced implementation details and some ML theory. <a href="special.html"><span>Chapter&nbsp;8</span></a> delves into detail on domain-specific methods that are implemented in our extension packages. Readers may choose to selectively read sections in this chapter depending on your use cases (i.e., if you have domain-specific problems to tackle), or to use these as introductions to new domains to explore. <a href="technical.html"><span>Chapter&nbsp;9</span></a> contains technical implementation details that are essential reading for advanced users who require parallelisation, custom error handling, and fine control over hyperparameters and large databases. <a href="interpretation.html"><span>Chapter&nbsp;10</span></a> discusses packages that can be integrated with mlr3 to provide model-agnostic interpretability methods. Finally, anyone who would like to contribute to our ecosystem should read <a href="extending.html"><span>Chapter&nbsp;11</span></a>.</p>
+<p>Of course, you can also read the book cover to cover from start to finish. We have marked any section that contains complex technical information with an exclamation mark (!). You may wish to skip these sections if you are only interested in basic functionality. Similarly, we have marked sections that are optional, such as parts that are more methodological focused and do not discuss the software implementation, with an asterisk (*). Readers that are interested in the more technical detail will likely want to pay attention to the tables at the end of each chapter that show the relationship between our S3 ‘sugar’ functions and the underlying R6 classes; this is explained in more detail in <a href="intro.html"><span>Chapter&nbsp;1</span></a>.</p>
+<div class="page-columns page-full"><p>This book tries to follow the <a href="https://diataxis.fr/">Diátaxis framework</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> for documentation and so we include tutorials, how-to guides, API references, and explanations. This means that the conclusion of each chapter includes a short reference to the core functions learnt in the chapter, links to relevant posts in the <a href="https://mlr-org.com/gallery.html">mlr3gallery</a><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, and a few exercises that will cover content introduced in the chapter. You can find the solutions to these exercises in <a href="solutions.html"><span>Appendix&nbsp;A</span></a>.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;<a href="https://diataxis.fr/">https://diataxis.fr/</a></p></li><li id="fn2"><p><sup>2</sup>&nbsp;<a href="https://mlr-org.com/gallery.html">https://mlr-org.com/gallery.html</a></p></li></div></div>
+<p>Finally, if you want to reproduce any of the results in this book, note that the random seed is set as the chapter number and the <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> printed in <a href="session.html"><span>Appendix&nbsp;E</span></a>.</p>
+</section><section id="installguide" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="installguide">Installation guidelines</h2>
+<div class="page-columns page-full"><p>All packages in the mlr3 ecosystem can be installed from GitHub and R-universe; the majority (but not all) packages can also be installed from CRAN. We recommend adding the mlr-org R-universe<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> to your R options so that you can install all packages with <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> without having to worry which package repository it comes from. To do this, install the <a href="https://cran.r-project.org/package=usethis"><code>usethis</code></a> package and run the following:</p><div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;R-universe is an alternative package repository to CRAN. The bit of code below tells R to look at both R-universe and CRAN when trying to install packages. R will always install the latest version of a package.</p></li></div></div>
+<div class="cell" data-hash="preface_cache/html/universe1_b5dda8c4db73367b0835e5532d71e5c6">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>usethis<span class="sc">::</span><span class="fu">edit_r_profile</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the file that opens add or change the <code>repos</code> argument in <code>options</code> so it looks something like this (you might need to add the full code block below or just edit the existing <code>options</code> function).</p>
+<div class="cell" data-hash="preface_cache/html/universe2_594aa8abfbc9c7a2b8e3158a6c9abcb9">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(</span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="at">mlrorg =</span> <span class="st">"https://mlr-org.r-universe.dev"</span>,</span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="at">CRAN =</span> <span class="st">"https://cloud.r-project.org/"</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Save the file, restart your R session, and you are ready to go!</p>
+<div class="cell" data-hash="preface_cache/html/install verse_b18586b5673f445a3170976b5d731b77">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">install.packages</span>(<span class="st">"mlr3verse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you want latest development versions of any of our packages, run</p>
+<div class="cell" data-hash="preface_cache/html/remotes_0a6018cecdc997e27a8427c86e88528e">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"mlr-org/{pkg}"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>with <code>{pkg}</code> replaced with the name of the package you want to install. You can see an up-to-date list of all our extension packages at <a href="https://github.com/mlr-org/mlr3/wiki/Extension-Packages">https://github.com/mlr-org/mlr3/wiki/Extension-Packages</a>.</p>
+</section><section id="community-links" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="community-links">Community links</h2>
+<div class="page-columns page-full"><p>The mlr community is open to all and we welcome everybody, from those completely new to ML and R to advanced coders and professional data scientists. You can reach us on our <a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/signup_email?id=6n7n67tdh7d4bnfxydqomjqspo">Mattermost</a><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p><div class="no-row-height column-margin column-container"><li id="fn4"><p><sup>4</sup>&nbsp;<a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/signup_email?id=6n7n67tdh7d4bnfxydqomjqspo">https://lmmisld-lmu-stats-slds.srv.mwn.de/signup_email?id=6n7n67tdh7d4bnfxydqomjqspo</a></p></li></div></div>
+<div class="page-columns page-full"><p>For case studies and how-to guides, check out the <a href="https://mlr-org.com/gallery.html">mlr3gallery</a><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> for extended practical blog posts. For updates on mlr you might find <a href="https://mlr-org.com/blog.html">our blog</a><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> a useful point of reference.</p><div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;<a href="https://mlr-org.com/gallery.html">https://mlr-org.com/gallery.html</a></p></li><li id="fn6"><p><sup>6</sup>&nbsp;<a href="https://mlr-org.com/blog.html">https://mlr-org.com/blog.html</a></p></li></div></div>
+<div class="page-columns page-full"><p>We appreciate all contributions, whether they are bug reports, feature requests, or pull requests that fix bugs or extend functionality. Each of our GitHub repositories includes issues and pull request templates to ensure we can help you as much as possible to get started. Please make sure you read our <a href="https://github.com/mlr-org/mlr3/blob/main/.github/CODE_OF_CONDUCT.md">code of conduct</a><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> and <a href="https://github.com/mlr-org/mlr3/blob/main/CONTRIBUTING.md">contribution guidelines</a><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>. With so many packages in our universe it may be hard to keep track of where to open issues. As a general rule:</p><div class="no-row-height column-margin column-container"><li id="fn7"><p><sup>7</sup>&nbsp;<a href="https://github.com/mlr-org/mlr3/blob/main/.github/CODE_OF_CONDUCT.md">https://github.com/mlr-org/mlr3/blob/main/.github/CODE_OF_CONDUCT.md</a></p></li><li id="fn8"><p><sup>8</sup>&nbsp;<a href="https://github.com/mlr-org/mlr3/blob/main/CONTRIBUTING.md">https://github.com/mlr-org/mlr3/blob/main/CONTRIBUTING.md</a></p></li></div></div>
+<ol type="1">
+<li>If you have a question about using any part of the mlr3 ecosystem, ask on <a href="https://stackoverflow.com/">StackOverflow</a> and use the tag #mlr3 – one of our team will answer you there. Be sure to include a reproducible example (reprex) and if we think you found a bug then we will refer you to the relevant GitHub repository.</li>
+<li>Bug reports or pull requests about core functionality (train, predict, etc.) should be opened in the <a href="https://github.com/mlr3">mlr3</a> GitHub repository.</li>
+<li>Bug reports or pull requests about learners should be opened in the <a href="https://github.com/mlr3extralearners">mlr3extralearners</a> GitHub repository.</li>
+<li>Bug reports or pull requests about measures should be opened in the <a href="https://github.com/mlr3measures">mlr3measures</a> GitHub repository.</li>
+<li>Bug reports or pull requests about domain specific functionality should be opened in the GitHub repository of the respective package (see <a href="intro.html"><span>Chapter&nbsp;1</span></a>).</li>
+</ol>
+<p>Do not worry about opening an issue in the wrong place, we will transfer it to the right one!</p>
+</section><section id="citeus" class="level2"><h2 class="anchored" data-anchor-id="citeus">Citation info</h2>
+<p>Every package in the mlr3verse has its own citation details that can be found on the respective GitHub repository.</p>
+<p>To reference this book please use:</p>
+<pre><code>Becker M, Binder M, Bischl B, Foss N, Kotthoff L, Lang M, Pfisterer F,
+Reich N G, Richter J, Schratz P, Sonabend R, Pulatov D.
+2023. "Preface". https://mlr3book.mlr-org.com.</code></pre>
+<pre><code>@misc{
+    title = Preface
+    author = {Marc Becker, Martin Binder, Bernd Bischl, Natalie Foss,
+    Lars Kotthoff, Michel Lang, Florian Pfisterer, Nicholas G. Reich,
+    Jakob Richter, Patrick Schratz, Raphael Sonabend, Damir Pulatov},
+    url = {https://mlr3book.mlr-org.com},
+    year = {2023}
+}</code></pre>
+<p>To reference the <a href="https://mlr3.mlr-org.com"><code>mlr3</code></a> package, please cite our JOSS paper:</p>
+<pre><code>Lang M, Binder M, Richter J, Schratz P, Pfisterer F, Coors S, Au Q,
+Casalicchio G, Kotthoff L, Bischl B (2019). “mlr3: A modern object-oriented
+machine learning framework in R.” Journal of Open Source Software.
+doi: 10.21105/joss.01903.
+
+@Article{mlr3,
+  title = {{mlr3}: A modern object-oriented machine learning framework in {R}},
+  author = {Michel Lang and Martin Binder and Jakob Richter and Patrick Schratz and
+  Florian Pfisterer and Stefan Coors and Quay Au and Giuseppe Casalicchio and
+  Lars Kotthoff and Bernd Bischl},
+  journal = {Journal of Open Source Software},
+  year = {2019},
+  month = {dec},
+  doi = {10.21105/joss.01903},
+  url = {https://joss.theoj.org/papers/10.21105/joss.01903},
+}</code></pre>
+</section><section id="styleguide" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="styleguide">mlr3book style guide</h2>
+<div class="page-columns page-full"><p>Throughout this book we will use our own style guide that can be found in the <a href="https://github.com/mlr-org/mlr3/wiki/Style-Guide">mlr3 wiki</a><a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>. Below are the most important style choices relevant to the book.</p><div class="no-row-height column-margin column-container"><li id="fn9"><p><sup>9</sup>&nbsp;<a href="https://github.com/mlr-org/mlr3/wiki/Style-Guide">https://github.com/mlr-org/mlr3/wiki/Style-Guide</a></p></li></div></div>
+<ol type="1">
+<li><p>We always use <code>=</code> instead of <code>&lt;-</code> for assignment.</p></li>
+<li><p>Class names are in <code>UpperCamelCase</code></p></li>
+<li><p>Function and method names are in <code>lower_snake_case</code></p></li>
+<li><p>When referencing functions, we will only include the package prefix (e.g., <code>pkg::function</code>) for functions outside the mlr3 universe or when there may be ambiguity about in which package the function lives. Note you can use <code>environment(function)</code> to see which namespace a function is loaded from.</p></li>
+<li>
+<p>We denote packages, fields, methods, and functions as follows:</p>
+<ul>
+<li>
+<code>package</code> - With link (if online) to package CRAN, R-Universe, or GitHub page</li>
+<li>
+<code>package::function()</code> (for functions <em>outside</em> the mlr-org ecosystem)</li>
+<li>
+<code>function()</code> (for functions <em>inside</em> the mlr-org ecosystem) - With link to function documentation page</li>
+<li>
+<code>$field</code> for fields (data encapsulated in a R6 class)</li>
+<li>
+<code>$method()</code> for methods (functions encapsulated in a R6 class)</li>
+</ul>
+</li>
+</ol>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Getting Started</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./intro.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction and Overview</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb21" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Preface {.unnumbered}</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>{{&lt; include _setup.qmd &gt;}}</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="in">```{r C0 seed, echo = FALSE}</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>Welcome to the Machine Learning in R universe (mlr3verse)!</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>Before we begin, make sure you have installed <span class="in">`r mlr3`</span> if you want to follow along.</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>We recommend installing the complete <span class="in">`r mlr3verse`</span>, which will install all of the important packages.</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r C0 install mlr3verse, eval = FALSE}</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"mlr3verse"</span>)</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>Or you can install just the base package:</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r C0 install mlr3, eval = FALSE}</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"mlr3"</span>)</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>In our first example, we will show you some of the most basic functionality -- training a model and making predictions.</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r C0 egBasic}</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlr3)</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>task <span class="ot">=</span> <span class="fu">tsk</span>(<span class="st">"penguins"</span>)</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>split <span class="ot">=</span> <span class="fu">partition</span>(task)</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>learner <span class="ot">=</span> <span class="fu">lrn</span>(<span class="st">"classif.rpart"</span>)</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>learner<span class="sc">$</span><span class="fu">train</span>(task, <span class="at">row_ids =</span> split<span class="sc">$</span>train)</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>learner<span class="sc">$</span>model</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">=</span> learner<span class="sc">$</span><span class="fu">predict</span>(task, <span class="at">row_ids =</span> split<span class="sc">$</span>test)</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>predictions</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>predictions<span class="sc">$</span><span class="fu">score</span>(<span class="fu">msr</span>(<span class="st">"classif.acc"</span>))</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>In this example, we trained a decision tree on a subset of the <span class="in">`penguins`</span> dataset, made predictions on the rest of the data and then evaluated these with the accuracy measure. In @sec-basics we will break this down in more detail.</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a><span class="in">`r mlr3`</span> makes training and predicting easy, but it also allows us to perform very complex operations in just a few lines of code:</span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{r C0 egHard, output = FALSE}</span></span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlr3verse)</span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlr3pipelines)</span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlr3benchmark)</span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>tasks <span class="ot">=</span> <span class="fu">tsks</span>(<span class="fu">c</span>(<span class="st">"breast_cancer"</span>, <span class="st">"sonar"</span>))</span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>tuned_rf <span class="ot">=</span> <span class="fu">auto_tuner</span>(</span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tnr</span>(<span class="st">"grid_search"</span>, <span class="at">resolution =</span> <span class="dv">5</span>),</span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lrn</span>(<span class="st">"classif.ranger"</span>, <span class="at">num.trees =</span> <span class="fu">to_tune</span>(<span class="dv">200</span>, <span class="dv">500</span>)),</span>
+<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rsmp</span>(<span class="st">"holdout"</span>)</span>
+<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a>tuned_rf <span class="ot">=</span> <span class="fu">pipeline_robustify</span>(<span class="cn">NULL</span>, tuned_rf, <span class="cn">TRUE</span>) <span class="sc">%&gt;&gt;%</span></span>
+<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">po</span>(<span class="st">"learner"</span>, tuned_rf)</span>
+<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a>stack_lrn <span class="ot">=</span> <span class="fu">ppl</span>(</span>
+<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stacking"</span>,</span>
+<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">base_learners =</span> <span class="fu">lrns</span>(<span class="fu">c</span>(<span class="st">"classif.rpart"</span>, <span class="st">"classif.kknn"</span>)),</span>
+<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lrn</span>(<span class="st">"classif.log_reg"</span>))</span>
+<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a>stack_lrn <span class="ot">=</span> <span class="fu">pipeline_robustify</span>(<span class="cn">NULL</span>, stack_lrn, <span class="cn">TRUE</span>) <span class="sc">%&gt;&gt;%</span></span>
+<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">po</span>(<span class="st">"learner"</span>, stack_lrn)</span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>learners <span class="ot">=</span> <span class="fu">c</span>(tuned_rf, stack_lrn)</span>
+<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a>bm <span class="ot">=</span> <span class="fu">benchmark</span>(<span class="fu">benchmark_grid</span>(tasks, learners, <span class="fu">rsmp</span>(<span class="st">"holdout"</span>)))</span>
+<span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r C0 egHardOut}</span></span>
+<span id="cb21-68"><a href="#cb21-68" aria-hidden="true" tabindex="-1"></a>bma <span class="ot">=</span> bm<span class="sc">$</span><span class="fu">aggregate</span>(<span class="fu">msr</span>(<span class="st">"classif.acc"</span>))[, <span class="fu">c</span>(<span class="st">"task_id"</span>, <span class="st">"learner_id"</span>,</span>
+<span id="cb21-69"><a href="#cb21-69" aria-hidden="true" tabindex="-1"></a>  <span class="st">"classif.acc"</span>)]</span>
+<span id="cb21-70"><a href="#cb21-70" aria-hidden="true" tabindex="-1"></a>bma<span class="sc">$</span>learner_id <span class="ot">=</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"RF"</span>, <span class="st">"Stack"</span>), <span class="dv">2</span>)</span>
+<span id="cb21-71"><a href="#cb21-71" aria-hidden="true" tabindex="-1"></a>bma</span>
+<span id="cb21-72"><a href="#cb21-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-73"><a href="#cb21-73" aria-hidden="true" tabindex="-1"></a><span class="fu">as.BenchmarkAggr</span>(bm)<span class="sc">$</span><span class="fu">friedman_test</span>()</span>
+<span id="cb21-74"><a href="#cb21-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-75"><a href="#cb21-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-76"><a href="#cb21-76" aria-hidden="true" tabindex="-1"></a>In this (much more complex!) example we chose two tasks and two machine learning (ML) algorithms ("learners" in <span class="in">`r mlr3`</span> terms).</span>
+<span id="cb21-77"><a href="#cb21-77" aria-hidden="true" tabindex="-1"></a>We used automated tuning to optimize the number of trees in the random forest learner (@sec-optimization) and a ML pipeline that imputes missing data, collapses factor levels, and creates stacked models (@sec-pipelines).</span>
+<span id="cb21-78"><a href="#cb21-78" aria-hidden="true" tabindex="-1"></a>We also showed basic features like loading learners (@sec-basics) and choosing resampling strategies for benchmarking (@sec-performance).</span>
+<span id="cb21-79"><a href="#cb21-79" aria-hidden="true" tabindex="-1"></a>Finally, we compared the performance of the models using the mean accuracy on the test set, and applied a statistical test to see if the learners performed significantly different (they did not!).</span>
+<span id="cb21-80"><a href="#cb21-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-81"><a href="#cb21-81" aria-hidden="true" tabindex="-1"></a>You will learn how to do all this and more in this book.</span>
+<span id="cb21-82"><a href="#cb21-82" aria-hidden="true" tabindex="-1"></a>We will walk through the functionality offered by <span class="in">`r mlr3`</span> and the packages in the <span class="in">`r mlr3verse`</span> step by step.</span>
+<span id="cb21-83"><a href="#cb21-83" aria-hidden="true" tabindex="-1"></a>There are a few different ways you can use this book, which we will discuss next.</span>
+<span id="cb21-84"><a href="#cb21-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-85"><a href="#cb21-85" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to use this book {#howtouse}</span></span>
+<span id="cb21-86"><a href="#cb21-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-87"><a href="#cb21-87" aria-hidden="true" tabindex="-1"></a>The mlr3 ecosystem is the result of many years of methodological and applied research and improving the design and implementation of the packages over the years.</span>
+<span id="cb21-88"><a href="#cb21-88" aria-hidden="true" tabindex="-1"></a>This book describes the resulting features of the <span class="in">`r mlr3verse`</span> and discusses best practices for ML, technical implementation details, extension guidelines, and in-depth considerations for optimizing ML.</span>
+<span id="cb21-89"><a href="#cb21-89" aria-hidden="true" tabindex="-1"></a>It is suitable for a wide range of readers and levels of ML expertise.</span>
+<span id="cb21-90"><a href="#cb21-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-91"><a href="#cb21-91" aria-hidden="true" tabindex="-1"></a>@sec-introduction, @sec-basics, and @sec-performance cover the basics of mlr3.</span>
+<span id="cb21-92"><a href="#cb21-92" aria-hidden="true" tabindex="-1"></a>These chapters are essential to understanding the core infrastrucure of ML in mlr3.</span>
+<span id="cb21-93"><a href="#cb21-93" aria-hidden="true" tabindex="-1"></a>We recommend that all readers study these chapters to become familiar with basic mlr3 terminology, syntax, and style.</span>
+<span id="cb21-94"><a href="#cb21-94" aria-hidden="true" tabindex="-1"></a>@sec-optimization, @sec-feature-selection, and @sec-pipelines contain more advanced implementation details and some ML theory.</span>
+<span id="cb21-95"><a href="#cb21-95" aria-hidden="true" tabindex="-1"></a>@sec-special delves into detail on domain-specific methods that are implemented in our extension packages.</span>
+<span id="cb21-96"><a href="#cb21-96" aria-hidden="true" tabindex="-1"></a>Readers may choose to selectively read sections in this chapter depending on your use cases (i.e., if you have domain-specific problems to tackle), or to use these as introductions to new domains to explore.</span>
+<span id="cb21-97"><a href="#cb21-97" aria-hidden="true" tabindex="-1"></a>@sec-technical contains technical implementation details that are essential reading for advanced users who require parallelisation, custom error handling, and fine control over hyperparameters and large databases.</span>
+<span id="cb21-98"><a href="#cb21-98" aria-hidden="true" tabindex="-1"></a>@sec-interpretation discusses packages that can be integrated with mlr3 to provide model-agnostic interpretability methods.</span>
+<span id="cb21-99"><a href="#cb21-99" aria-hidden="true" tabindex="-1"></a>Finally, anyone who would like to contribute to our ecosystem should read @sec-extending.</span>
+<span id="cb21-100"><a href="#cb21-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-101"><a href="#cb21-101" aria-hidden="true" tabindex="-1"></a>Of course, you can also read the book cover to cover from start to finish.</span>
+<span id="cb21-102"><a href="#cb21-102" aria-hidden="true" tabindex="-1"></a>We have marked any section that contains complex technical information with an exclamation mark (!).</span>
+<span id="cb21-103"><a href="#cb21-103" aria-hidden="true" tabindex="-1"></a>You may wish to skip these sections if you are only interested in basic functionality.</span>
+<span id="cb21-104"><a href="#cb21-104" aria-hidden="true" tabindex="-1"></a>Similarly, we have marked sections that are optional, such as parts that are more methodological focused and do not discuss the software implementation, with an asterisk (*).</span>
+<span id="cb21-105"><a href="#cb21-105" aria-hidden="true" tabindex="-1"></a>Readers that are interested in the more technical detail will likely want to pay attention to the tables at the end of each chapter that show the relationship between our S3 'sugar' functions and the underlying R6 classes; this is explained in more detail in @sec-introduction.</span>
+<span id="cb21-106"><a href="#cb21-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-107"><a href="#cb21-107" aria-hidden="true" tabindex="-1"></a>This book tries to follow the <span class="in">`r link("https://diataxis.fr/", "Diátaxis framework")`</span> for documentation and so we include tutorials, how-to guides, API references, and explanations.</span>
+<span id="cb21-108"><a href="#cb21-108" aria-hidden="true" tabindex="-1"></a>This means that the conclusion of each chapter includes a short reference to the core functions learnt in the chapter, links to relevant posts in the <span class="in">`r link("https://mlr-org.com/gallery.html", "mlr3gallery")`</span>, and a few exercises that will cover content introduced in the chapter.</span>
+<span id="cb21-109"><a href="#cb21-109" aria-hidden="true" tabindex="-1"></a>You can find the solutions to these exercises in @sec-solutions.</span>
+<span id="cb21-110"><a href="#cb21-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-111"><a href="#cb21-111" aria-hidden="true" tabindex="-1"></a>Finally, if you want to reproduce any of the results in this book, note that the random seed is set as the chapter number and the <span class="in">`sessionInfo()`</span> printed in @sec-session-info.</span>
+<span id="cb21-112"><a href="#cb21-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-113"><a href="#cb21-113" aria-hidden="true" tabindex="-1"></a><span class="fu">## Installation guidelines {#installguide}</span></span>
+<span id="cb21-114"><a href="#cb21-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-115"><a href="#cb21-115" aria-hidden="true" tabindex="-1"></a>All packages in the mlr3 ecosystem can be installed from GitHub and R-universe; the majority (but not all) packages can also be installed from CRAN.</span>
+<span id="cb21-116"><a href="#cb21-116" aria-hidden="true" tabindex="-1"></a>We recommend adding the mlr-org R-universe<span class="ot">[^runiverse]</span> to your R options so that you can install all packages with <span class="in">`install.packages()`</span> without having to worry which package repository it comes from.</span>
+<span id="cb21-117"><a href="#cb21-117" aria-hidden="true" tabindex="-1"></a>To do this, install the <span class="in">`r ref_pkg("usethis")`</span> package and run the following:</span>
+<span id="cb21-118"><a href="#cb21-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-119"><a href="#cb21-119" aria-hidden="true" tabindex="-1"></a><span class="ot">[^runiverse]: </span>R-universe is an alternative package repository to CRAN. The bit of code below tells R to look at both R-universe and CRAN when trying to install packages. R will always install the latest version of a package.</span>
+<span id="cb21-120"><a href="#cb21-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-121"><a href="#cb21-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r universe1, eval = FALSE}</span></span>
+<span id="cb21-122"><a href="#cb21-122" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">edit_r_profile</span>()</span>
+<span id="cb21-123"><a href="#cb21-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-124"><a href="#cb21-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-125"><a href="#cb21-125" aria-hidden="true" tabindex="-1"></a>In the file that opens add or change the <span class="in">`repos`</span> argument in <span class="in">`options`</span> so it looks something like this (you might need to add the full code block below or just edit the existing <span class="in">`options`</span> function).</span>
+<span id="cb21-126"><a href="#cb21-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-127"><a href="#cb21-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r universe2, eval = FALSE}</span></span>
+<span id="cb21-128"><a href="#cb21-128" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(</span>
+<span id="cb21-129"><a href="#cb21-129" aria-hidden="true" tabindex="-1"></a>  <span class="at">mlrorg =</span> <span class="st">"https://mlr-org.r-universe.dev"</span>,</span>
+<span id="cb21-130"><a href="#cb21-130" aria-hidden="true" tabindex="-1"></a>  <span class="at">CRAN =</span> <span class="st">"https://cloud.r-project.org/"</span></span>
+<span id="cb21-131"><a href="#cb21-131" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb21-132"><a href="#cb21-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-133"><a href="#cb21-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-134"><a href="#cb21-134" aria-hidden="true" tabindex="-1"></a>Save the file, restart your R session, and you are ready to go!</span>
+<span id="cb21-135"><a href="#cb21-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-136"><a href="#cb21-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r install verse, eval = FALSE}</span></span>
+<span id="cb21-137"><a href="#cb21-137" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"mlr3verse"</span>)</span>
+<span id="cb21-138"><a href="#cb21-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-139"><a href="#cb21-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-140"><a href="#cb21-140" aria-hidden="true" tabindex="-1"></a>If you want latest development versions of any of our packages, run</span>
+<span id="cb21-141"><a href="#cb21-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-142"><a href="#cb21-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r remotes, eval = FALSE}</span></span>
+<span id="cb21-143"><a href="#cb21-143" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"mlr-org/{pkg}"</span>)</span>
+<span id="cb21-144"><a href="#cb21-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-145"><a href="#cb21-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-146"><a href="#cb21-146" aria-hidden="true" tabindex="-1"></a>with <span class="in">`{pkg}`</span> replaced with the name of the package you want to install.</span>
+<span id="cb21-147"><a href="#cb21-147" aria-hidden="true" tabindex="-1"></a>You can see an up-to-date list of all our extension packages at <span class="co">[</span><span class="ot">https://github.com/mlr-org/mlr3/wiki/Extension-Packages</span><span class="co">](https://github.com/mlr-org/mlr3/wiki/Extension-Packages)</span>.</span>
+<span id="cb21-148"><a href="#cb21-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-149"><a href="#cb21-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## Community links</span></span>
+<span id="cb21-150"><a href="#cb21-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-151"><a href="#cb21-151" aria-hidden="true" tabindex="-1"></a>The mlr community is open to all and we welcome everybody, from those completely new to ML and R to advanced coders and professional data scientists.</span>
+<span id="cb21-152"><a href="#cb21-152" aria-hidden="true" tabindex="-1"></a>You can reach us on our <span class="in">`r link("https://lmmisld-lmu-stats-slds.srv.mwn.de/signup_email?id=6n7n67tdh7d4bnfxydqomjqspo", "Mattermost")`</span>.</span>
+<span id="cb21-153"><a href="#cb21-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-154"><a href="#cb21-154" aria-hidden="true" tabindex="-1"></a>For case studies and how-to guides, check out the <span class="in">`r link("https://mlr-org.com/gallery.html", "mlr3gallery")`</span> for extended practical blog posts.</span>
+<span id="cb21-155"><a href="#cb21-155" aria-hidden="true" tabindex="-1"></a>For updates on mlr you might find <span class="in">`r link("https://mlr-org.com/blog.html", "our blog")`</span> a useful point of reference.</span>
+<span id="cb21-156"><a href="#cb21-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-157"><a href="#cb21-157" aria-hidden="true" tabindex="-1"></a>We appreciate all contributions, whether they are bug reports, feature requests, or pull requests that fix bugs or extend functionality.</span>
+<span id="cb21-158"><a href="#cb21-158" aria-hidden="true" tabindex="-1"></a>Each of our GitHub repositories includes issues and pull request templates to ensure we can help you as much as possible to get started.</span>
+<span id="cb21-159"><a href="#cb21-159" aria-hidden="true" tabindex="-1"></a>Please make sure you read our <span class="in">`r link("https://github.com/mlr-org/mlr3/blob/main/.github/CODE_OF_CONDUCT.md", "code of conduct")`</span> and <span class="in">`r link("https://github.com/mlr-org/mlr3/blob/main/CONTRIBUTING.md", "contribution guidelines")`</span>.</span>
+<span id="cb21-160"><a href="#cb21-160" aria-hidden="true" tabindex="-1"></a>With so many packages in our universe it may be hard to keep track of where to open issues.</span>
+<span id="cb21-161"><a href="#cb21-161" aria-hidden="true" tabindex="-1"></a>As a general rule:</span>
+<span id="cb21-162"><a href="#cb21-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-163"><a href="#cb21-163" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>If you have a question about using any part of the mlr3 ecosystem, ask on <span class="co">[</span><span class="ot">StackOverflow</span><span class="co">](https://stackoverflow.com/)</span> and use the tag #mlr3 -- one of our team will answer you there.</span>
+<span id="cb21-164"><a href="#cb21-164" aria-hidden="true" tabindex="-1"></a>Be sure to include a reproducible example (reprex) and if we think you found a bug then we will refer you to the relevant GitHub repository.</span>
+<span id="cb21-165"><a href="#cb21-165" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Bug reports or pull requests about core functionality (train, predict, etc.) should be opened in the <span class="co">[</span><span class="ot">mlr3</span><span class="co">](https://github.com/mlr3)</span> GitHub repository.</span>
+<span id="cb21-166"><a href="#cb21-166" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Bug reports or pull requests about learners should be opened in the <span class="co">[</span><span class="ot">mlr3extralearners</span><span class="co">](https://github.com/mlr3extralearners)</span> GitHub repository.</span>
+<span id="cb21-167"><a href="#cb21-167" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Bug reports or pull requests about measures should be opened in the <span class="co">[</span><span class="ot">mlr3measures</span><span class="co">](https://github.com/mlr3measures)</span> GitHub repository.</span>
+<span id="cb21-168"><a href="#cb21-168" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Bug reports or pull requests about domain specific functionality should be opened in the GitHub repository of the respective package (see @sec-introduction).</span>
+<span id="cb21-169"><a href="#cb21-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-170"><a href="#cb21-170" aria-hidden="true" tabindex="-1"></a>Do not worry about opening an issue in the wrong place, we will transfer it to the right one!</span>
+<span id="cb21-171"><a href="#cb21-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-172"><a href="#cb21-172" aria-hidden="true" tabindex="-1"></a><span class="fu">## Citation info {#citeus}</span></span>
+<span id="cb21-173"><a href="#cb21-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-174"><a href="#cb21-174" aria-hidden="true" tabindex="-1"></a>Every package in the mlr3verse has its own citation details that can be found on the respective GitHub repository.</span>
+<span id="cb21-175"><a href="#cb21-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-176"><a href="#cb21-176" aria-hidden="true" tabindex="-1"></a>To reference this book please use:</span>
+<span id="cb21-177"><a href="#cb21-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-178"><a href="#cb21-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-179"><a href="#cb21-179" aria-hidden="true" tabindex="-1"></a><span class="in">Becker M, Binder M, Bischl B, Foss N, Kotthoff L, Lang M, Pfisterer F,</span></span>
+<span id="cb21-180"><a href="#cb21-180" aria-hidden="true" tabindex="-1"></a><span class="in">Reich N G, Richter J, Schratz P, Sonabend R, Pulatov D.</span></span>
+<span id="cb21-181"><a href="#cb21-181" aria-hidden="true" tabindex="-1"></a><span class="in">`r strftime(Sys.Date(), "%Y")`. "{{&lt; meta title &gt;}}". https://mlr3book.mlr-org.com.</span></span>
+<span id="cb21-182"><a href="#cb21-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-183"><a href="#cb21-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-184"><a href="#cb21-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-185"><a href="#cb21-185" aria-hidden="true" tabindex="-1"></a><span class="in">@misc{</span></span>
+<span id="cb21-186"><a href="#cb21-186" aria-hidden="true" tabindex="-1"></a><span class="in">    title = {{&lt; meta title &gt;}}</span></span>
+<span id="cb21-187"><a href="#cb21-187" aria-hidden="true" tabindex="-1"></a><span class="in">    author = {Marc Becker, Martin Binder, Bernd Bischl, Natalie Foss,</span></span>
+<span id="cb21-188"><a href="#cb21-188" aria-hidden="true" tabindex="-1"></a><span class="in">    Lars Kotthoff, Michel Lang, Florian Pfisterer, Nicholas G. Reich,</span></span>
+<span id="cb21-189"><a href="#cb21-189" aria-hidden="true" tabindex="-1"></a><span class="in">    Jakob Richter, Patrick Schratz, Raphael Sonabend, Damir Pulatov},</span></span>
+<span id="cb21-190"><a href="#cb21-190" aria-hidden="true" tabindex="-1"></a><span class="in">    url = {https://mlr3book.mlr-org.com},</span></span>
+<span id="cb21-191"><a href="#cb21-191" aria-hidden="true" tabindex="-1"></a><span class="in">    year = {`r strftime(Sys.Date(), "%Y")`}</span></span>
+<span id="cb21-192"><a href="#cb21-192" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb21-193"><a href="#cb21-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-194"><a href="#cb21-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-195"><a href="#cb21-195" aria-hidden="true" tabindex="-1"></a>To reference the <span class="in">`r mlr3`</span> package, please cite our JOSS paper:</span>
+<span id="cb21-196"><a href="#cb21-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-197"><a href="#cb21-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-198"><a href="#cb21-198" aria-hidden="true" tabindex="-1"></a><span class="in">Lang M, Binder M, Richter J, Schratz P, Pfisterer F, Coors S, Au Q,</span></span>
+<span id="cb21-199"><a href="#cb21-199" aria-hidden="true" tabindex="-1"></a><span class="in">Casalicchio G, Kotthoff L, Bischl B (2019). “mlr3: A modern object-oriented</span></span>
+<span id="cb21-200"><a href="#cb21-200" aria-hidden="true" tabindex="-1"></a><span class="in">machine learning framework in R.” Journal of Open Source Software.</span></span>
+<span id="cb21-201"><a href="#cb21-201" aria-hidden="true" tabindex="-1"></a><span class="in">doi: 10.21105/joss.01903.</span></span>
+<span id="cb21-202"><a href="#cb21-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-203"><a href="#cb21-203" aria-hidden="true" tabindex="-1"></a><span class="in">@Article{mlr3,</span></span>
+<span id="cb21-204"><a href="#cb21-204" aria-hidden="true" tabindex="-1"></a><span class="in">  title = {{mlr3}: A modern object-oriented machine learning framework in {R}},</span></span>
+<span id="cb21-205"><a href="#cb21-205" aria-hidden="true" tabindex="-1"></a><span class="in">  author = {Michel Lang and Martin Binder and Jakob Richter and Patrick Schratz and</span></span>
+<span id="cb21-206"><a href="#cb21-206" aria-hidden="true" tabindex="-1"></a><span class="in">  Florian Pfisterer and Stefan Coors and Quay Au and Giuseppe Casalicchio and</span></span>
+<span id="cb21-207"><a href="#cb21-207" aria-hidden="true" tabindex="-1"></a><span class="in">  Lars Kotthoff and Bernd Bischl},</span></span>
+<span id="cb21-208"><a href="#cb21-208" aria-hidden="true" tabindex="-1"></a><span class="in">  journal = {Journal of Open Source Software},</span></span>
+<span id="cb21-209"><a href="#cb21-209" aria-hidden="true" tabindex="-1"></a><span class="in">  year = {2019},</span></span>
+<span id="cb21-210"><a href="#cb21-210" aria-hidden="true" tabindex="-1"></a><span class="in">  month = {dec},</span></span>
+<span id="cb21-211"><a href="#cb21-211" aria-hidden="true" tabindex="-1"></a><span class="in">  doi = {10.21105/joss.01903},</span></span>
+<span id="cb21-212"><a href="#cb21-212" aria-hidden="true" tabindex="-1"></a><span class="in">  url = {https://joss.theoj.org/papers/10.21105/joss.01903},</span></span>
+<span id="cb21-213"><a href="#cb21-213" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb21-214"><a href="#cb21-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-215"><a href="#cb21-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-216"><a href="#cb21-216" aria-hidden="true" tabindex="-1"></a><span class="fu">## mlr3book style guide {#styleguide}</span></span>
+<span id="cb21-217"><a href="#cb21-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-218"><a href="#cb21-218" aria-hidden="true" tabindex="-1"></a>Throughout this book we will use our own style guide that can be found in the <span class="in">`r link("https://github.com/mlr-org/mlr3/wiki/Style-Guide", "mlr3 wiki")`</span>.</span>
+<span id="cb21-219"><a href="#cb21-219" aria-hidden="true" tabindex="-1"></a>Below are the most important style choices relevant to the book.</span>
+<span id="cb21-220"><a href="#cb21-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-221"><a href="#cb21-221" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>We always use <span class="in">`=`</span> instead of <span class="in">`&lt;-`</span> for assignment.</span>
+<span id="cb21-222"><a href="#cb21-222" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Class names are in <span class="in">`UpperCamelCase`</span></span>
+<span id="cb21-223"><a href="#cb21-223" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Function and method names are in <span class="in">`lower_snake_case`</span></span>
+<span id="cb21-224"><a href="#cb21-224" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>When referencing functions, we will only include the package prefix (e.g., <span class="in">`pkg::function`</span>) for functions outside the mlr3 universe or when there may be ambiguity about in which package the function lives. Note you can use <span class="in">`environment(function)`</span> to see which namespace a function is loaded from.</span>
+<span id="cb21-225"><a href="#cb21-225" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>We denote packages, fields, methods, and functions as follows:</span>
+<span id="cb21-226"><a href="#cb21-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-227"><a href="#cb21-227" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`package`</span> - With link (if online) to package CRAN, R-Universe, or GitHub page</span>
+<span id="cb21-228"><a href="#cb21-228" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`package::function()`</span> (for functions _outside_ the mlr-org ecosystem)</span>
+<span id="cb21-229"><a href="#cb21-229" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`function()`</span> (for functions _inside_ the mlr-org ecosystem) - With link to function documentation page</span>
+<span id="cb21-230"><a href="#cb21-230" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`$field`</span> for fields (data encapsulated in a R6 class)</span>
+<span id="cb21-231"><a href="#cb21-231" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`$method()`</span> for methods (functions encapsulated in a R6 class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">All content licenced under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</div>   
+      <div class="nav-footer-center"><a href="https://mlr-org.com">Website</a> | <a href="https://github.com/mlr-org/mlr3book">GitHub</a> | <a href="https://mlr-org.com/gallery">Gallery</a> | <a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/">Mattermost</a></div>
+    <div class="nav-footer-right">Written with <i class="bi bi-heart-fill"></i> for #rstats, ML and FOSS by the mlr-org team.</div>
+  </div>
+</footer>
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

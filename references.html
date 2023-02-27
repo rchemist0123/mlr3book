@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Flexible and Robust Machine Learning Using mlr3 in R - References</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./solutions.html" rel="next">
+<link href="./favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script async="" src="https://hypothes.is/embed.js"></script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">References</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Flexible and Robust Machine Learning Using mlr3 in R</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/mlr-org/mlr3book/tree/main/book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="./Flexible-and-Robust-Machine-Learning-Using-mlr3-in-R.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Getting Started</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction and Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fundamentals</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./performance.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Resampling and Benchmarking</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hyperparameter Optimization</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feature-selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Feature Selection</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pipelines.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipelines</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preprocessing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Preprocessing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./special.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Special Tasks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./technical.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Technical</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./interpretation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Model Interpretation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./extending.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Extending</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link active">References</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Appendices</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solutions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Solutions to exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tasks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Tasks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview-tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Overview Tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./session.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Session Info</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">References</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Baniecki2019" class="csl-entry" role="doc-biblioentry">
+Baniecki, Hubert, and Przemyslaw Biecek. 2019. <span>“<span class="nocase">modelStudio: Interactive Studio with Explanations for ML
+Predictive Models</span>.”</span> <em>Journal of Open Source
+Software</em> 4 (43): 1798. <a href="https://doi.org/10.21105/joss.01798">https://doi.org/10.21105/joss.01798</a>.
+</div>
+<div id="ref-Baniecki2021" class="csl-entry" role="doc-biblioentry">
+Baniecki, Hubert, Wojciech Kretowicz, Piotr Piątyszek, Jakub Wiśniewski,
+and Przemysław Biecek. 2021. <span>“<span class="nocase">dalex:
+Responsible Machine Learning with Interactive Explainability and
+Fairness in Python</span>.”</span> <em>Journal of Machine Learning
+Research</em> 22 (214): 1–7. <a href="http://jmlr.org/papers/v22/20-1473.html">http://jmlr.org/papers/v22/20-1473.html</a>.
+</div>
+<div id="ref-bengio2003no" class="csl-entry" role="doc-biblioentry">
+Bengio, Yoshua, and Yves Grandvalet. 2003. <span>“No Unbiased Estimator
+of the Variance of k-Fold Cross-Validation.”</span> <em>Advances in
+Neural Information Processing Systems</em> 16.
+</div>
+<div id="ref-bergstra2012" class="csl-entry" role="doc-biblioentry">
+Bergstra, James, and Yoshua Bengio. 2012. <span>“Random Search for
+Hyper-Parameter Optimization.”</span> <em>Journal of Machine Learning
+Research</em> 13 (10): 281–305. <a href="http://jmlr.org/papers/v13/bergstra12a.html">http://jmlr.org/papers/v13/bergstra12a.html</a>.
+</div>
+<div id="ref-Biecek2018" class="csl-entry" role="doc-biblioentry">
+Biecek, Przemyslaw. 2018. <span>“<span class="nocase">DALEX: Explainers
+for complex predictive models in R</span>.”</span> <em>Journal of
+Machine Learning Research</em> 19 (84): 1–5. <a href="http://jmlr.org/papers/v19/18-416.html">http://jmlr.org/papers/v19/18-416.html</a>.
+</div>
+<div id="ref-biecek_burzykowski_2021" class="csl-entry" role="doc-biblioentry">
+Biecek, Przemyslaw, and Tomasz Burzykowski. 2021. <em><span>Explanatory
+Model Analysis</span></em>. Chapman; Hall/CRC, New York. <a href="https://ema.drwhy.ai/">https://ema.drwhy.ai/</a>.
+</div>
+<div id="ref-mlr3pipelines" class="csl-entry" role="doc-biblioentry">
+Binder, Martin, Florian Pfisterer, Michel Lang, Lennart Schneider, Lars
+Kotthoff, and Bernd Bischl. 2021. <span>“<span class="nocase">mlr3pipelines</span> - Flexible Machine Learning
+Pipelines in <span>R</span>.”</span> <em>Journal of Machine Learning
+Research</em> 22 (184): 1–7. <a href="http://jmlr.org/papers/v22/21-0281.html">http://jmlr.org/papers/v22/21-0281.html</a>.
+</div>
+<div id="ref-hpo_practical" class="csl-entry" role="doc-biblioentry">
+Bischl, Bernd, Martin Binder, Michel Lang, Tobias Pielok, Jakob Richter,
+Stefan Coors, Janek Thomas, et al. 2021. <span>“Hyperparameter
+Optimization: Foundations, Algorithms, Best Practices and Open
+Challenges.”</span> <a href="https://doi.org/10.48550/ARXIV.2107.05847">https://doi.org/10.48550/ARXIV.2107.05847</a>.
+</div>
+<div id="ref-mlr" class="csl-entry" role="doc-biblioentry">
+Bischl, Bernd, Michel Lang, Lars Kotthoff, Julia Schiffner, Jakob
+Richter, Erich Studerus, Giuseppe Casalicchio, and Zachary M. Jones.
+2016. <span>“<span class="nocase">mlr</span>: <span>M</span>achine
+<span>L</span>earning in <span>R</span>.”</span> <em>Journal of Machine
+Learning Research</em> 17 (170): 1–5. <a href="http://jmlr.org/papers/v17/15-066.html">http://jmlr.org/papers/v17/15-066.html</a>.
+</div>
+<div id="ref-bischl2012resampling" class="csl-entry" role="doc-biblioentry">
+Bischl, Bernd, Olaf Mersmann, Heike Trautmann, and Claus Weihs. 2012.
+<span>“Resampling Methods for Meta-Model Validation with Recommendations
+for Evolutionary Computation.”</span> <em>Evolutionary Computation</em>
+20 (2): 249–75.
+</div>
+<div id="ref-bishop_2006" class="csl-entry" role="doc-biblioentry">
+Bishop, Christopher M. 2006. <em>Pattern Recognition and Machine
+Learning</em>. Springer.
+</div>
+<div id="ref-bommert2020" class="csl-entry" role="doc-biblioentry">
+Bommert, Andrea, Xudong Sun, Bernd Bischl, Jörg Rahnenführer, and Michel
+Lang. 2020. <span>“Benchmark for Filter Methods for Feature Selection in
+High-Dimensional Classification Data.”</span> <em>Computational
+Statistics &amp; Data Analysis</em> 143: 106839. https://doi.org/<a href="https://doi.org/10.1016/j.csda.2019.106839">https://doi.org/10.1016/j.csda.2019.106839</a>.
+</div>
+<div id="ref-Breiman1996" class="csl-entry" role="doc-biblioentry">
+Breiman, Leo. 1996. <span>“Bagging Predictors.”</span> <em>Machine
+Learning</em> 24 (2): 123–40.
+</div>
+<div id="ref-brenning2012" class="csl-entry" role="doc-biblioentry">
+Brenning, Alexander. 2012. <span>“Spatial Cross-Validation and Bootstrap
+for the Assessment of Prediction Rules in Remote Sensing: The
+<span>R</span> Package Sperrorest.”</span> In <em>2012 <span>IEEE</span>
+International Geoscience and Remote Sensing Symposium</em>.
+<span>IEEE</span>. <a href="https://doi.org/10.1109/igarss.2012.6352393">https://doi.org/10.1109/igarss.2012.6352393</a>.
+</div>
+<div id="ref-Bucker2022" class="csl-entry" role="doc-biblioentry">
+Bücker, Michael, Gero Szepannek, Alicja Gosiewska, and Przemyslaw
+Biecek. 2022. <span>“Transparency, Auditability, and Explainability of
+Machine Learning Models in Credit Scoring.”</span> <em>Journal of the
+Operational Research Society</em> 73 (1): 70–90. <a href="https://doi.org/10.1080/01605682.2021.1922098">https://doi.org/10.1080/01605682.2021.1922098</a>.
+</div>
+<div id="ref-chandrashekar2014" class="csl-entry" role="doc-biblioentry">
+Chandrashekar, Girish, and Ferat Sahin. 2014. <span>“A Survey on Feature
+Selection Methods.”</span> <em>Computers and Electrical Engineering</em>
+40 (1): 16–28. https://doi.org/<a href="https://doi.org/10.1016/j.compeleceng.2013.11.024">https://doi.org/10.1016/j.compeleceng.2013.11.024</a>.
+</div>
+<div id="ref-Collett2014" class="csl-entry" role="doc-biblioentry">
+Collett, David. 2014. <em><span class="nocase">Modelling Survival Data
+in Medical Research</span></em>. 3rd ed. CRC.
+</div>
+<div id="ref-davis2006relationship" class="csl-entry" role="doc-biblioentry">
+Davis, Jesse, and Mark Goadrich. 2006. <span>“The Relationship Between
+Precision-Recall and ROC Curves.”</span> In <em>Proceedings of the 23rd
+International Conference on Machine Learning</em>, 233–40.
+</div>
+<div id="ref-demsar2006" class="csl-entry" role="doc-biblioentry">
+Demšar, Janez. 2006. <span>“Statistical Comparisons of Classifiers over
+Multiple Data Sets.”</span> <em>Journal of Machine Learning
+Research</em> 7 (1): 1–30. <a href="https://jmlr.org/papers/v7/demsar06a.html">https://jmlr.org/papers/v7/demsar06a.html</a>.
+</div>
+<div id="ref-hpo_automl" class="csl-entry" role="doc-biblioentry">
+Feurer, Matthias, and Frank Hutter. 2019. <span>“Hyperparameter
+Optimization.”</span> In <em>Automated Machine Learning: Methods,
+Systems, Challenges</em>, edited by Frank Hutter, Lars Kotthoff, and
+Joaquin Vanschoren, 3–33. Cham: Springer International Publishing. <a href="https://doi.org/10.1007/978-3-030-05318-5_1">https://doi.org/10.1007/978-3-030-05318-5_1</a>.
+</div>
+<div id="ref-guyon2003" class="csl-entry" role="doc-biblioentry">
+Guyon, Isabelle, and André Elisseeff. 2003. <span>“An Introduction to
+Variable and Feature Selection.”</span> <em>Journal of Machine Learning
+Research</em> 3 (Mar): 1157–82.
+</div>
+<div id="ref-hand2001simple" class="csl-entry" role="doc-biblioentry">
+Hand, David J, and Robert J Till. 2001. <span>“A Simple Generalisation
+of the Area Under the ROC Curve for Multiple Class Classification
+Problems.”</span> <em>Machine Learning</em> 45: 171–86.
+</div>
+<div id="ref-hansen2011" class="csl-entry" role="doc-biblioentry">
+Hansen, Nikolaus, and Anne Auger. 2011. <span>“CMA-ES: Evolution
+Strategies and Covariance Matrix Adaptation.”</span> In <em>Proceedings
+of the 13th Annual Conference Companion on Genetic and Evolutionary
+Computation</em>, 991–1010.
+</div>
+<div id="ref-hastie2001" class="csl-entry" role="doc-biblioentry">
+Hastie, Trevor, Jerome Friedman, and Robert Tibshirani. 2001. <em>The
+Elements of Statistical Learning</em>. Springer New York. <a href="https://doi.org/10.1007/978-0-387-21606-5">https://doi.org/10.1007/978-0-387-21606-5</a>.
+</div>
+<div id="ref-Holzinger2022" class="csl-entry" role="doc-biblioentry">
+Holzinger, Andreas, Anna Saranti, Christoph Molnar, Przemyslaw Biecek,
+and Wojciech Samek. 2022. <span>“Explainable AI Methods - a Brief
+Overview.”</span> <em>International Workshop on Extending Explainable AI
+Beyond Deep Models and Classifiers</em>, 13–38. <a href="https://doi.org/10.1007/978-3-031-04083-2_2">https://doi.org/10.1007/978-3-031-04083-2_2</a>.
+</div>
+<div id="ref-palmerpenguins2020" class="csl-entry" role="doc-biblioentry">
+Horst, Allison Marie, Alison Presmanes Hill, and Kristen B Gorman. 2020.
+<em><span class="nocase">palmerpenguins: Palmer Archipelago (Antarctica)
+penguin data</span></em>. <a href="https://doi.org/10.5281/zenodo.3960218">https://doi.org/10.5281/zenodo.3960218</a>.
+</div>
+<div id="ref-james_introduction_2014" class="csl-entry" role="doc-biblioentry">
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani.
+2014. <em>An Introduction to Statistical Learning: With Applications in
+r</em>. Springer Publishing Company, Incorporated.
+</div>
+<div id="ref-japkowicz2011evaluating" class="csl-entry" role="doc-biblioentry">
+Japkowicz, Nathalie, and Mohak Shah. 2011. <em>Evaluating Learning
+Algorithms: A Classification Perspective</em>. Cambridge University
+Press.
+</div>
+<div id="ref-hpo_multi" class="csl-entry" role="doc-biblioentry">
+Karl, Florian, Tobias Pielok, Julia Moosbauer, Florian Pfisterer, Stefan
+Coors, Martin Binder, Lennart Schneider, et al. 2022.
+<span>“Multi-Objective Hyperparameter Optimization - an
+Overview.”</span> <a href="https://doi.org/10.48550/ARXIV.2206.07438">https://doi.org/10.48550/ARXIV.2206.07438</a>.
+</div>
+<div id="ref-kim2009estimating" class="csl-entry" role="doc-biblioentry">
+Kim, Ji-Hyun. 2009. <span>“Estimating Classification Error Rate:
+Repeated Cross-Validation, Repeated Hold-Out and Bootstrap.”</span>
+<em>Computational Statistics &amp; Data Analysis</em> 53 (11): 3735–45.
+</div>
+<div id="ref-Krzyzinski2023" class="csl-entry" role="doc-biblioentry">
+Krzyziński, Mateusz, Mikołaj Spytek, Hubert Baniecki, and Przemysław
+Biecek. 2023. <span>“<span class="nocase">SurvSHAP(t): Time-dependent
+explanations of machine learning survival models</span>.”</span>
+<em>Knowledge-Based Systems</em> 262: 110234. https://doi.org/<a href="https://doi.org/10.1016/j.knosys.2022.110234">https://doi.org/10.1016/j.knosys.2022.110234</a>.
+</div>
+<div id="ref-checkmate" class="csl-entry" role="doc-biblioentry">
+Lang, Michel. 2017. <span>“<span class="nocase">checkmate: Fast Argument
+Checks for Defensive R Programming</span>.”</span> <em><span>The R
+Journal</span></em> 9 (1): 437–45. <a href="https://doi.org/10.32614/RJ-2017-028">https://doi.org/10.32614/RJ-2017-028</a>.
+</div>
+<div id="ref-mlr3" class="csl-entry" role="doc-biblioentry">
+Lang, Michel, Martin Binder, Jakob Richter, Patrick Schratz, Florian
+Pfisterer, Stefan Coors, Quay Au, Giuseppe Casalicchio, Lars Kotthoff,
+and Bernd Bischl. 2019. <span>“<span class="nocase">mlr3</span>: A
+Modern Object-Oriented Machine Learning Framework in
+<span>R</span>.”</span> <em>Journal of Open Source Software</em>,
+December. <a href="https://doi.org/10.21105/joss.01903">https://doi.org/10.21105/joss.01903</a>.
+</div>
+<div id="ref-legendre1993" class="csl-entry" role="doc-biblioentry">
+Legendre, Pierre. 1993. <span>“Spatial Autocorrelation: Trouble or New
+Paradigm?”</span> <em>Ecology</em> 74 (6): 1659–73. <a href="https://doi.org/10.2307/1939924">https://doi.org/10.2307/1939924</a>.
+</div>
+<div id="ref-li2017" class="csl-entry" role="doc-biblioentry">
+Li, Lisha, Kevin Jamieson, Giulia DeSalvo, Afshin Rostamizadeh, and
+Ameet Talwalkar. 2017. <span>“Hyperband: A Novel Bandit-Based Approach
+to Hyperparameter Optimization.”</span> <em>The Journal of Machine
+Learning Research</em> 18 (1): 6765–6816.
+</div>
+<div id="ref-lopez2016" class="csl-entry" role="doc-biblioentry">
+López-Ibáñez, Manuel, Jérémie Dubois-Lacoste, Leslie Pérez Cáceres,
+Mauro Birattari, and Thomas Stützle. 2016. <span>“The Irace Package:
+Iterated Racing for Automatic Algorithm Configuration.”</span>
+<em>Operations Research Perspectives</em> 3: 43–58.
+</div>
+<div id="ref-lovelace2019" class="csl-entry" role="doc-biblioentry">
+Lovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2019.
+<em>Geocomputation with <span>R</span></em>. CRC Press.
+</div>
+<div id="ref-meyer2018" class="csl-entry" role="doc-biblioentry">
+Meyer, Hanna, Christoph Reudenbach, Tomislav Hengl, Marwan Katurji, and
+Thomas Nauss. 2018. <span>“Improving Performance of Spatio-Temporal
+Machine Learning Models Using Forward Feature Selection and
+Target-Oriented Validation.”</span> <em>Environmental Modelling &amp;
+Software</em> 101 (March): 1–9. <a href="https://doi.org/10.1016/j.envsoft.2017.12.001">https://doi.org/10.1016/j.envsoft.2017.12.001</a>.
+</div>
+<div id="ref-molinaro2005prediction" class="csl-entry" role="doc-biblioentry">
+Molinaro, Annette M, Richard Simon, and Ruth M Pfeiffer. 2005.
+<span>“Prediction Error Estimation: A Comparison of Resampling
+Methods.”</span> <em>Bioinformatics</em> 21 (15): 3301–7.
+</div>
+<div id="ref-muenchow2012" class="csl-entry" role="doc-biblioentry">
+Muenchow, J., A. Brenning, and M. Richter. 2012. <span>“Geomorphic
+Process Rates of Landslides Along a Humidity Gradient in the Tropical
+Andes.”</span> <em>Geomorphology</em> 139-140: 271–84.
+https://doi.org/<a href="https://doi.org/10.1016/j.geomorph.2011.10.029">https://doi.org/10.1016/j.geomorph.2011.10.029</a>.
+</div>
+<div id="ref-ONeil" class="csl-entry" role="doc-biblioentry">
+O’Neil, Cathy. 2016. <em><span class="nocase">Weapons of Math
+Destruction: How Big Data Increases Inequality and Threatens
+Democracy</span></em>. New York, NY: Crown Publishing Group.
+</div>
+<div id="ref-R" class="csl-entry" role="doc-biblioentry">
+R Core Team. 2019. <em>R: A Language and Environment for Statistical
+Computing</em>. Vienna, Austria: R Foundation for Statistical Computing.
+<a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-Romaszko2019" class="csl-entry" role="doc-biblioentry">
+Romaszko, Kamil, Magda Tatarynowicz, Mateusz Urbański, and Przemysław
+Biecek. 2019. <span>“modelDown: Automated Website Generator with
+Interpretable Documentation for Predictive Machine Learning
+Models.”</span> <em>Journal of Open Source Software</em> 4 (38): 1444.
+<a href="https://doi.org/10.21105/joss.01444">https://doi.org/10.21105/joss.01444</a>.
+</div>
+<div id="ref-schratz2019" class="csl-entry" role="doc-biblioentry">
+Schratz, Patrick, Jannes Muenchow, Eugenia Iturritxa, Jakob Richter, and
+Alexander Brenning. 2019. <span>“Hyperparameter Tuning and Performance
+Assessment of Statistical and Machine-Learning Algorithms Using Spatial
+Data.”</span> <em>Ecological Modelling</em> 406 (August): 109–20. <a href="https://doi.org/10.1016/j.ecolmodel.2019.06.002">https://doi.org/10.1016/j.ecolmodel.2019.06.002</a>.
+</div>
+<div id="ref-Silverman1986" class="csl-entry" role="doc-biblioentry">
+Silverman, Bernard W. 1986. <em>Density Estimation for Statistics and
+Data Analysis</em>. Vol. 26. CRC press.
+</div>
+<div id="ref-Simon2007" class="csl-entry" role="doc-biblioentry">
+Simon, Richard. 2007. <span>“Resampling Strategies for Model Assessment
+and Selection.”</span> In <em>Fundamentals of Data Mining in Genomics
+and Proteomics</em>, edited by Werner Dubitzky, Martin Granzow, and
+Daniel Berrar, 173–86. <span>Boston, MA</span>: <span>Springer
+US</span>. <a href="https://doi.org/10.1007/978-0-387-47509-7_8">https://doi.org/10.1007/978-0-387-47509-7_8</a>.
+</div>
+<div id="ref-mlr3proba" class="csl-entry" role="doc-biblioentry">
+Sonabend, Raphael, Franz J Király, Andreas Bender, Bernd Bischl, and
+Michel Lang. 2021. <span>“<span class="nocase">mlr3proba</span>: An
+<span>R</span> Package for Machine Learning in Survival
+Analysis.”</span> <em>Bioinformatics</em>, February. <a href="https://doi.org/10.1093/bioinformatics/btab039">https://doi.org/10.1093/bioinformatics/btab039</a>.
+</div>
+<div id="ref-tsallis1996" class="csl-entry" role="doc-biblioentry">
+Tsallis, Constantino, and Daniel A Stariolo. 1996. <span>“Generalized
+Simulated Annealing.”</span> <em>Physica A: Statistical Mechanics and
+Its Applications</em> 233 (1-2): 395–406.
+</div>
+<div id="ref-Wisniewski2022" class="csl-entry" role="doc-biblioentry">
+Wiśniewski, Jakub, and Przemysław Biecek. 2022. <span>“The r Journal:
+Fairmodels: A Flexible Tool for Bias Detection, Visualization, and
+Mitigation in Binary Classification Models.”</span> <em>The R
+Journal</em> 14: 227–43. <a href="https://doi.org/10.32614/RJ-2022-019">https://doi.org/10.32614/RJ-2022-019</a>.
+</div>
+<div id="ref-Wolpert1992" class="csl-entry" role="doc-biblioentry">
+Wolpert, David H. 1992. <span>“Stacked Generalization.”</span>
+<em>Neural Networks</em> 5 (2): 241–59. https://doi.org/<a href="https://doi.org/10.1016/S0893-6080(05)80023-1">https://doi.org/10.1016/S0893-6080(05)80023-1</a>.
+</div>
+<div id="ref-xiang2013" class="csl-entry" role="doc-biblioentry">
+Xiang, Yang, Sylvain Gubian, Brian Suomela, and Julia Hoeng. 2013.
+<span>“Generalized Simulated Annealing for Global Optimization: The
+GenSA Package.”</span> <em>R J.</em> 5 (1): 13.
+</div>
+</div>
+
+
+<!-- -->
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./solutions.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Solutions to exercises</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># References {.unnumbered}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">All content licenced under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</div>   
+      <div class="nav-footer-center"><a href="https://mlr-org.com">Website</a> | <a href="https://github.com/mlr-org/mlr3book">GitHub</a> | <a href="https://mlr-org.com/gallery">Gallery</a> | <a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/">Mattermost</a></div>
+    <div class="nav-footer-right">Written with <i class="bi bi-heart-fill"></i> for #rstats, ML and FOSS by the mlr-org team.</div>
+  </div>
+</footer>
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

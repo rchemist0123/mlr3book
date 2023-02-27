@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Flexible and Robust Machine Learning Using mlr3 in R - Appendix D — Overview Tables</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./session.html" rel="next">
+<link href="./tasks.html" rel="prev">
+<link href="./favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<script async="" src="https://hypothes.is/embed.js"></script>
+</head>
+<body class="nav-sidebar floating">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Appendix D — Overview Tables</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Flexible and Robust Machine Learning Using mlr3 in R</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/mlr-org/mlr3book/tree/main/book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="./Flexible-and-Robust-Machine-Learning-Using-mlr3-in-R.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Getting Started</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction and Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fundamentals</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./performance.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Resampling and Benchmarking</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hyperparameter Optimization</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feature-selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Feature Selection</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pipelines.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipelines</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preprocessing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Preprocessing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./special.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Special Tasks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./technical.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Technical</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./interpretation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Model Interpretation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./extending.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Extending</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solutions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Solutions to exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tasks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Tasks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./overview-tables.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Overview Tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./session.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Session Info</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span id="appendix-overview-tables" class="quarto-section-identifier d-none d-lg-block">Appendix D — Overview Tables</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>Our <a href="https://mlr-org.com">homepage</a> provides overviews and tables of the following objects:</p>
+<table class="table">
+<thead><tr class="header">
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Link</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Packages overview</td>
+<td style="text-align: left;"><a href="https://mlr-org.com/ecosystem.html">https://mlr-org.com/packages.html</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Task overview</td>
+<td style="text-align: left;"><a href="https://mlr-org.com/tasks.html">https://mlr-org.com/tasks.html</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Learner overview</td>
+<td style="text-align: left;"><a href="https://mlr-org.com/learners.html">https://mlr-org.com/learners.html</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Resampling overview</td>
+<td style="text-align: left;"><a href="https://mlr-org.com/resamplings.html">https://mlr-org.com/resamplings.html</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Measure overview</td>
+<td style="text-align: left;"><a href="https://mlr-org.com/measures.html">https://mlr-org.com/measures.html</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PipeOp overview</td>
+<td style="text-align: left;"><a href="https://mlr-org.com/pipeops.html">https://mlr-org.com/pipeops.html</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Graph overview</td>
+<td style="text-align: left;"><a href="https://mlr-org.com/graphs.html">https://mlr-org.com/graphs.html</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tuner overview</td>
+<td style="text-align: left;"><a href="https://mlr-org.com/tuners.html">https://mlr-org.com/tuners.html</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Terminator overview</td>
+<td style="text-align: left;"><a href="https://mlr-org.com/terminators.html">https://mlr-org.com/terminators.html</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tuning space overview</td>
+<td style="text-align: left;"><a href="https://mlr-org.com/tuning_spaces.html">https://mlr-org.com/tuning_spaces.html</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Filter overview</td>
+<td style="text-align: left;"><a href="https://mlr-org.com/filters.html">https://mlr-org.com/filters.html</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FSelector overview</td>
+<td style="text-align: left;"><a href="https://mlr-org.com/fselectors.html">https://mlr-org.com/fselectors.html</a></td>
+</tr>
+</tbody>
+</table>
+<div class="cell" data-hash="overview-tables_cache/html/unnamed-chunk-2_5a8c745aa69fcfd620f10854c84909f3">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(mlr3verse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(mlr3proba)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(mlr3spatiotempcv)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(mlr3spatial)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(mlr3extralearners)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(mlr3hyperband)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(mlr3mbo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="overview-tables_cache/html/unnamed-chunk-3_49da8e9baf00e4f5246af84761b73af6">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>mlr_tasks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;DictionaryTask&gt; with 32 stored values
+Keys: actg, bike_sharing, boston_housing, breast_cancer, cookfarm_mlr3,
+  diplodia, ecuador, faithful, gbcs, german_credit, grace, ilpd, iris,
+  kc_housing, leipzig, lung, moneyball, mtcars, optdigits, penguins,
+  penguins_simple, pima, precip, rats, sonar, spam, titanic,
+  unemployment, usarrests, whas, wine, zoo</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>mlr_learners</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;DictionaryLearner&gt; with 145 stored values
+Keys: classif.abess, classif.AdaBoostM1, classif.bart, classif.C50,
+  classif.catboost, classif.cforest, classif.ctree, classif.cv_glmnet,
+  classif.debug, classif.earth, classif.featureless, classif.fnn,
+  classif.gam, classif.gamboost, classif.gausspr, classif.gbm,
+  classif.glmboost, classif.glmer, classif.glmnet, classif.IBk,
+  classif.imbalanced_rfsrc, classif.J48, classif.JRip, classif.kknn,
+  classif.ksvm, classif.lda, classif.liblinear, classif.lightgbm,
+  classif.LMT, classif.log_reg, classif.lssvm, classif.mob,
+  classif.multinom, classif.naive_bayes, classif.nnet, classif.OneR,
+  classif.PART, classif.priority_lasso, classif.qda,
+  classif.randomForest, classif.ranger, classif.rfsrc, classif.rpart,
+  classif.svm, classif.xgboost, clust.agnes, clust.ap, clust.cmeans,
+  clust.cobweb, clust.dbscan, clust.diana, clust.em, clust.fanny,
+  clust.featureless, clust.ff, clust.hclust, clust.kkmeans,
+  clust.kmeans, clust.MBatchKMeans, clust.mclust, clust.meanshift,
+  clust.pam, clust.SimpleKMeans, clust.xmeans, dens.hist, dens.kde,
+  dens.kde_ks, dens.locfit, dens.logspline, dens.mixed, dens.nonpar,
+  dens.pen, dens.plug, dens.spline, regr.abess, regr.bart,
+  regr.catboost, regr.cforest, regr.ctree, regr.cubist, regr.cv_glmnet,
+  regr.debug, regr.earth, regr.featureless, regr.fnn, regr.gam,
+  regr.gamboost, regr.gausspr, regr.gbm, regr.glm, regr.glmboost,
+  regr.glmnet, regr.IBk, regr.kknn, regr.km, regr.ksvm, regr.liblinear,
+  regr.lightgbm, regr.lm, regr.lmer, regr.M5Rules, regr.mars, regr.mob,
+  regr.nnet, regr.priority_lasso, regr.randomForest, regr.ranger,
+  regr.rfsrc, regr.rpart, regr.rsm, regr.rvm, regr.svm, regr.xgboost,
+  surv.akritas, surv.aorsf, surv.blackboost, surv.cforest,
+  surv.coxboost, surv.coxph, surv.coxtime, surv.ctree,
+  surv.cv_coxboost, surv.cv_glmnet, surv.deephit, surv.deepsurv,
+  surv.dnnsurv, surv.flexible, surv.gamboost, surv.gbm, surv.glmboost,
+  surv.glmnet, surv.kaplan, surv.loghaz, surv.mboost, surv.nelson,
+  surv.obliqueRSF, surv.parametric, surv.pchazard, surv.penalized,
+  surv.priority_lasso, surv.ranger, surv.rfsrc, surv.rpart, surv.svm,
+  surv.xgboost</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>mlr_resamplings</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;DictionaryResampling&gt; with 24 stored values
+Keys: bootstrap, custom, custom_cv, cv, holdout, insample, loo,
+  repeated_cv, repeated_spcv_block, repeated_spcv_coords,
+  repeated_spcv_disc, repeated_spcv_env, repeated_spcv_tiles,
+  repeated_sptcv_cluto, repeated_sptcv_cstf, spcv_block, spcv_buffer,
+  spcv_coords, spcv_disc, spcv_env, spcv_tiles, sptcv_cluto,
+  sptcv_cstf, subsampling</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>mlr_measures</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;DictionaryMeasure&gt; with 93 stored values
+Keys: aic, bic, classif.acc, classif.auc, classif.bacc, classif.bbrier,
+  classif.ce, classif.costs, classif.dor, classif.fbeta, classif.fdr,
+  classif.fn, classif.fnr, classif.fomr, classif.fp, classif.fpr,
+  classif.logloss, classif.mauc_au1p, classif.mauc_au1u,
+  classif.mauc_aunp, classif.mauc_aunu, classif.mbrier, classif.mcc,
+  classif.npv, classif.ppv, classif.prauc, classif.precision,
+  classif.recall, classif.sensitivity, classif.specificity, classif.tn,
+  classif.tnr, classif.tp, classif.tpr, clust.ch, clust.db, clust.dunn,
+  clust.silhouette, clust.wss, debug, dens.logloss, oob_error,
+  regr.bias, regr.ktau, regr.logloss, regr.mae, regr.mape, regr.maxae,
+  regr.medae, regr.medse, regr.mse, regr.msle, regr.pbias, regr.rae,
+  regr.rmse, regr.rmsle, regr.rrse, regr.rse, regr.rsq, regr.sae,
+  regr.smape, regr.srho, regr.sse, selected_features, sim.jaccard,
+  sim.phi, surv.brier, surv.calib_alpha, surv.calib_beta,
+  surv.chambless_auc, surv.cindex, surv.dcalib, surv.graf,
+  surv.hung_auc, surv.intlogloss, surv.logloss, surv.mae, surv.mse,
+  surv.nagelk_r2, surv.oquigley_r2, surv.rcll, surv.rmse, surv.schmid,
+  surv.song_auc, surv.song_tnr, surv.song_tpr, surv.uno_auc,
+  surv.uno_tnr, surv.uno_tpr, surv.xu_r2, time_both, time_predict,
+  time_train</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>mlr_pipeops</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;DictionaryPipeOp&gt; with 74 stored values
+Keys: boxcox, branch, chunk, classbalancing, classifavg, classweights,
+  colapply, collapsefactors, colroles, compose_crank, compose_distr,
+  compose_probregr, copy, crankcompose, datefeatures, distrcompose,
+  encode, encodeimpact, encodelmer, featureunion, filter, fixfactors,
+  histbin, ica, imputeconstant, imputehist, imputelearner, imputemean,
+  imputemedian, imputemode, imputeoor, imputesample, kernelpca,
+  learner, learner_cv, missind, modelmatrix, multiplicityexply,
+  multiplicityimply, mutate, nmf, nop, ovrsplit, ovrunite, pca, proxy,
+  quantilebin, randomprojection, randomresponse, regravg,
+  removeconstants, renamecolumns, replicate, scale, scalemaxabs,
+  scalerange, select, smote, spatialsign, subsample, survavg,
+  targetinvert, targetmutate, targettrafoscalerange, textvectorizer,
+  threshold, trafopred_regrsurv, trafopred_survregr,
+  trafotask_regrsurv, trafotask_survregr, tunethreshold, unbranch,
+  vtreat, yeojohnson</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>mlr_graphs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;DictionaryGraph&gt; with 13 stored values
+Keys: bagging, branch, crankcompositor, distrcompositor, greplicate,
+  ovr, probregr, robustify, stacking, survaverager, survbagging,
+  survtoregr, targettrafo</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>mlr_tuners</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;DictionaryTuner&gt; with 10 stored values
+Keys: cmaes, design_points, gensa, grid_search, hyperband, irace, mbo,
+  nloptr, random_search, successive_halving</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>mlr_terminators</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;DictionaryTerminator&gt; with 8 stored values
+Keys: clock_time, combo, evals, none, perf_reached, run_time,
+  stagnation, stagnation_batch</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>mlr_tuning_spaces</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;DictionaryTuningSpaces&gt; with 24 stored values
+Keys: classif.glmnet.default, classif.glmnet.rbv2,
+  classif.kknn.default, classif.kknn.rbv2, classif.ranger.default,
+  classif.ranger.rbv2, classif.rpart.default, classif.rpart.rbv2,
+  classif.svm.default, classif.svm.rbv2, classif.xgboost.default,
+  classif.xgboost.rbv2, regr.glmnet.default, regr.glmnet.rbv2,
+  regr.kknn.default, regr.kknn.rbv2, regr.ranger.default,
+  regr.ranger.rbv2, regr.rpart.default, regr.rpart.rbv2,
+  regr.svm.default, regr.svm.rbv2, regr.xgboost.default,
+  regr.xgboost.rbv2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>mlr_filters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;DictionaryFilter&gt; with 21 stored values
+Keys: anova, auc, carscore, carsurvscore, cmim, correlation, disr,
+  find_correlation, importance, information_gain, jmi, jmim,
+  kruskal_test, mim, mrmr, njmim, performance, permutation, relief,
+  selected_features, variance</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r numberLines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>mlr_fselectors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;DictionaryFSelector&gt; with 8 stored values
+Keys: design_points, exhaustive_search, genetic_search, random_search,
+  rfe, rfecv, sequential, shadow_variable_search</code></pre>
+</div>
+</div>
+
+
+<!-- -->
+
+
+</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./tasks.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Tasks</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./session.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Session Info</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb24" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Overview Tables {#appendix-overview-tables}</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>{{&lt; include _setup.qmd &gt;}}</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>Our <span class="co">[</span><span class="ot">homepage</span><span class="co">](https://mlr-org.com)</span> provides overviews and tables of the following objects:</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>|  Description  | Link  |</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>|:---|:---|</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>|  Packages overview  | <span class="co">[</span><span class="ot">https://mlr-org.com/packages.html</span><span class="co">](https://mlr-org.com/ecosystem.html)</span> |</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>|  Task overview  |  <span class="co">[</span><span class="ot">https://mlr-org.com/tasks.html</span><span class="co">](https://mlr-org.com/tasks.html)</span>  |</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>|  Learner overview  | <span class="co">[</span><span class="ot">https://mlr-org.com/learners.html</span><span class="co">](https://mlr-org.com/learners.html)</span>   |</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>|  Resampling overview  | <span class="co">[</span><span class="ot">https://mlr-org.com/resamplings.html</span><span class="co">](https://mlr-org.com/resamplings.html)</span>   |</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>|  Measure overview  | <span class="co">[</span><span class="ot">https://mlr-org.com/measures.html</span><span class="co">](https://mlr-org.com/measures.html)</span>  |</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>|  PipeOp overview  | <span class="co">[</span><span class="ot">https://mlr-org.com/pipeops.html</span><span class="co">](https://mlr-org.com/pipeops.html)</span>   |</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>|  Graph overview  |  <span class="co">[</span><span class="ot">https://mlr-org.com/graphs.html</span><span class="co">](https://mlr-org.com/graphs.html)</span>  |</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>|  Tuner overview  |  <span class="co">[</span><span class="ot">https://mlr-org.com/tuners.html</span><span class="co">](https://mlr-org.com/tuners.html)</span>  |</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>|  Terminator overview  |  <span class="co">[</span><span class="ot">https://mlr-org.com/terminators.html</span><span class="co">](https://mlr-org.com/terminators.html)</span>  |</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>|  Tuning space overview  | <span class="co">[</span><span class="ot">https://mlr-org.com/tuning_spaces.html</span><span class="co">](https://mlr-org.com/tuning_spaces.html)</span>   |</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>|  Filter overview  |  <span class="co">[</span><span class="ot">https://mlr-org.com/filters.html</span><span class="co">](https://mlr-org.com/filters.html)</span>  |</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>|  FSelector overview  | <span class="co">[</span><span class="ot">https://mlr-org.com/fselectors.html</span><span class="co">](https://mlr-org.com/fselectors.html)</span>   |</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message = FALSE}</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlr3verse)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlr3proba)</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlr3spatiotempcv)</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlr3spatial)</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlr3extralearners)</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlr3hyperband)</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlr3mbo)</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>mlr_tasks</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>mlr_learners</span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>mlr_resamplings</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>mlr_measures</span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>mlr_pipeops</span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>mlr_graphs</span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>mlr_tuners</span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>mlr_terminators</span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>mlr_tuning_spaces</span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>mlr_filters</span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>mlr_fselectors</span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">All content licenced under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</div>   
+      <div class="nav-footer-center"><a href="https://mlr-org.com">Website</a> | <a href="https://github.com/mlr-org/mlr3book">GitHub</a> | <a href="https://mlr-org.com/gallery">Gallery</a> | <a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/">Mattermost</a></div>
+    <div class="nav-footer-right">Written with <i class="bi bi-heart-fill"></i> for #rstats, ML and FOSS by the mlr-org team.</div>
+  </div>
+</footer>
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
